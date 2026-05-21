@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Доска позора — Docka</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ── Navigation ───────────────────────────────────────────── -->
+  <header class="site-header">
+    <nav class="nav-inner">
+      <a class="nav-logo" href="index.html">Docka<span>.</span></a>
+      <ul class="nav-links">
+        <li><a href="index.html">Главная</a></li>
+        <li><a href="shame.html" class="active">Доска позора</a></li>
+        <li><a href="#">Правила</a></li>
+        <li><a href="#">Участники</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- ── Page Content ──────────────────────────────────────────── -->
+  <main class="page-wrap">
+
+    <!-- Page Header -->
+    <div class="page-hero">
+      <h1><span class="icon">📋</span> Доска позора</h1>
+      <p>
+        Публичный реестр зафиксированных нарушений правил сообщества.
+        Каждая запись подтверждена скриншотом и содержит только факты.
+      </p>
+      <div class="notice-box">
+        <strong>Цель раздела</strong> — поддержание порядка, дисциплины и соблюдение правил сайта.
+        Раздел не является инструментом травли или унижения.
+        Информация публикуется в соответствии с <a href="#" style="color:var(--accent)">внутренними правилами ресурса</a>.
+        Участник вправе обратиться к администрации для уточнения или оспаривания записи.
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats-strip">
+      <div class="stat-chip"><strong id="cnt-total">3</strong>Всего записей</div>
+      <div class="stat-chip"><strong id="cnt-active">1</strong>Активных</div>
+      <div class="stat-chip"><strong id="cnt-warning">1</strong>Предупреждений</div>
+      <div class="stat-chip"><strong id="cnt-resolved">1</strong>Закрытых</div>
+    </div>
+
+    <!-- Filters -->
+    <div class="filters">
+      <button class="filter-btn active" data-filter="all">Все</button>
+      <button class="filter-btn" data-filter="active">Активные</button>
+      <button class="filter-btn" data-filter="warning">Предупреждение</button>
+      <button class="filter-btn" data-filter="resolved">Закрытые</button>
+    </div>
+
+    <!-- Cards Grid -->
+    <div class="cards-grid" id="cards-grid">
+
+      <!-- ── Card 1 ── Активное нарушение ── -->
+      <article class="v-card" data-status="active">
+        <div class="v-card__shot" onclick="openLightbox('screenshots/placeholder-1.svg')">
+          <img src="screenshots/placeholder-1.svg" alt="Скриншот нарушения — violator_nick, спам в чате" loading="lazy" />
+          <span class="v-card__shot-label">📷 Скриншот нарушения</span>
+          <span class="v-card__zoom-hint">🔍 Увеличить</span>
+        </div>
+        <div class="v-card__body">
+          <div class="v-card__head">
+            <div class="v-card__avatar">V</div>
+            <div>
+              <div class="v-card__nick">violator_nick</div>
+              <div class="v-card__id">ID #00412</div>
+            </div>
+          </div>
+          <p class="v-card__desc">
+            <strong>Нарушение п.&nbsp;3.1 — массовый спам.</strong>
+            Участник разместил 14 идентичных сообщений в общем чате в течение 3 минут,
+            засоряя канал и мешая коммуникации других пользователей.
+          </p>
+          <div class="v-card__meta">
+            <span class="v-card__date">Дата фиксации: <span>12 апр. 2026</span></span>
+            <span class="badge badge--active">● Активно</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- ── Card 2 ── Предупреждение ── -->
+      <article class="v-card" data-status="warning">
+        <div class="v-card__shot" onclick="openLightbox('screenshots/placeholder-3.svg')">
+          <img src="screenshots/placeholder-3.svg" alt="Скриншот нарушения — nick_three, провокация" loading="lazy" />
+          <span class="v-card__shot-label">📷 Скриншот нарушения</span>
+          <span class="v-card__zoom-hint">🔍 Увеличить</span>
+        </div>
+        <div class="v-card__body">
+          <div class="v-card__head">
+            <div class="v-card__avatar">N</div>
+            <div>
+              <div class="v-card__nick">nick_three</div>
+              <div class="v-card__id">ID #00389</div>
+            </div>
+          </div>
+          <p class="v-card__desc">
+            <strong>Нарушение п.&nbsp;2.4 — провокация и систематический оффтоп.</strong>
+            Повторное нарушение в течение 7 дней: намеренное уклонение от темы обсуждения
+            и провоцирование конфликтов между участниками форума.
+          </p>
+          <div class="v-card__meta">
+            <span class="v-card__date">Дата фиксации: <span>10 мая 2026</span></span>
+            <span class="badge badge--warning">⚠ Предупреждение</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- ── Card 3 ── Закрытое ── -->
+      <article class="v-card" data-status="resolved">
+        <div class="v-card__shot" onclick="openLightbox('screenshots/placeholder-2.svg')">
+          <img src="screenshots/placeholder-2.svg" alt="Скриншот нарушения — user_two, запрещённый контент" loading="lazy" />
+          <span class="v-card__shot-label">📷 Скриншот нарушения</span>
+          <span class="v-card__zoom-hint">🔍 Увеличить</span>
+        </div>
+        <div class="v-card__body">
+          <div class="v-card__head">
+            <div class="v-card__avatar">U</div>
+            <div>
+              <div class="v-card__nick">user_two</div>
+              <div class="v-card__id">ID #00201</div>
+            </div>
+          </div>
+          <p class="v-card__desc">
+            <strong>Нарушение п.&nbsp;5.2 — публикация запрещённого контента.</strong>
+            Участник разместил материалы, нарушающие правила ресурса (п.&nbsp;5.2).
+            Нарушение признано, санкция применена, вопрос закрыт.
+          </p>
+          <div class="v-card__meta">
+            <span class="v-card__date">Дата фиксации: <span>28 мар. 2026</span></span>
+            <span class="badge badge--resolved">✓ Закрыто</span>
+          </div>
+        </div>
+      </article>
+
+    </div><!-- /cards-grid -->
+
+  </main>
+
+  <!-- ── Lightbox ───────────────────────────────────────────────── -->
+  <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <button class="lightbox__close" onclick="closeLightbox()" aria-label="Закрыть">&times;</button>
+    <img class="lightbox__img" id="lightbox-img" src="" alt="Скриншот нарушения" />
+  </div>
+
+  <!-- ── Footer ────────────────────────────────────────────────── -->
+  <footer class="site-footer">
+    © 2026 Docka. Все записи публикуются в соответствии с внутренними правилами ресурса.
+  </footer>
+
+  <!-- ── Scripts ───────────────────────────────────────────────── -->
+  <script>
+    /* ── Lightbox ── */
+    function openLightbox(src) {
+      document.getElementById('lightbox-img').src = src;
+      document.getElementById('lightbox').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeLightbox();
+    });
+
+    /* ── Filter ── */
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const cards = document.querySelectorAll('.v-card');
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const filter = btn.dataset.filter;
+        let visible = 0;
+
+        cards.forEach(card => {
+          const match = filter === 'all' || card.dataset.status === filter;
+          card.style.display = match ? '' : 'none';
+          if (match) visible++;
+        });
+
+        // show empty state if no cards match
+        const existing = document.querySelector('.empty-state');
+        if (existing) existing.remove();
+        if (visible === 0) {
+          const el = document.createElement('div');
+          el.className = 'empty-state';
+          el.innerHTML = '<div class="big">📭</div>Нарушений в этой категории не найдено.';
+          document.getElementById('cards-grid').appendChild(el);
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
