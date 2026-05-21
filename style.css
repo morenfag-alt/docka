@@ -239,6 +239,7 @@ img { display: block; max-width: 100%; }
   color: var(--accent);
   flex-shrink: 0;
   text-transform: uppercase;
+  /* color overridden per-card via --av-color */
 }
 .v-card__nick {
   font-weight: 600;
@@ -293,24 +294,18 @@ img { display: block; max-width: 100%; }
   backdrop-filter: blur(4px);
 }
 .lightbox.open { display: flex; }
-.lightbox__img {
-  max-width: 90vw;
-  max-height: 85vh;
-  border-radius: 8px;
-  border: 1px solid var(--border);
-  object-fit: contain;
-}
 .lightbox__close {
-  position: absolute;
-  top: 20px;
-  right: 24px;
   background: none;
   border: none;
-  color: #fff;
-  font-size: 28px;
+  color: var(--text-muted);
+  font-size: 24px;
   cursor: pointer;
   line-height: 1;
+  flex-shrink: 0;
+  padding: 0 4px;
+  transition: color .15s;
 }
+.lightbox__close:hover { color: #fff; }
 
 /* ─── Empty State ──────────────────────────────────────────────── */
 .empty-state {
@@ -375,10 +370,163 @@ img { display: block; max-width: 100%; }
 .feature-card h3 { font-size: 15px; font-weight: 600; color: #fff; margin-bottom: 6px; }
 .feature-card p { font-size: 13px; color: var(--text-muted); }
 
+/* ─── Card: section label ──────────────────────────────────────── */
+.v-card__section-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+
+/* ─── Card: avatar color via CSS var ──────────────────────────── */
+.v-card__avatar {
+  background: color-mix(in srgb, var(--av-color, var(--accent)) 15%, var(--surface-2));
+  border-color: color-mix(in srgb, var(--av-color, var(--accent)) 30%, var(--border));
+  color: var(--av-color, var(--accent));
+}
+
+.v-card__avatar--sm {
+  width: 24px;
+  height: 24px;
+  font-size: 11px;
+  flex-shrink: 0;
+}
+
+/* head-info block */
+.v-card__head-info { flex: 1; min-width: 0; }
+
+/* ml-auto utility */
+.ml-auto { margin-left: auto; }
+
+/* ─── Contact Tags (Discord / Telegram) ────────────────────────── */
+.v-card__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-bottom: 14px;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 11px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  transition: filter .15s, transform .15s;
+  cursor: pointer;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.tag:hover { filter: brightness(1.15); transform: translateY(-1px); }
+
+.tag svg {
+  width: 13px;
+  height: 13px;
+  flex-shrink: 0;
+}
+
+.tag--discord {
+  background: rgba(88, 101, 242, .15);
+  border: 1px solid rgba(88, 101, 242, .35);
+  color: #8b97ff;
+}
+.tag--discord:hover { color: #aab4ff; }
+
+.tag--telegram {
+  background: rgba(0, 136, 204, .12);
+  border: 1px solid rgba(0, 136, 204, .3);
+  color: #4db8f0;
+}
+.tag--telegram:hover { color: #7dcef5; }
+
+/* ─── Reporter row ─────────────────────────────────────────────── */
+.v-card__reporter {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+}
+
+.reporter-label {
+  font-size: 11px;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.reporter-user {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.reporter-nick {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.reporter-role {
+  font-size: 11px;
+  color: var(--text-muted);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 1px 6px;
+}
+
+/* ─── Lightbox (updated) ───────────────────────────────────────── */
+.lightbox__inner {
+  display: flex;
+  flex-direction: column;
+  max-width: 92vw;
+  max-height: 90vh;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.lightbox__topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface-2);
+  gap: 16px;
+}
+
+.lightbox__title {
+  font-size: 13px;
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.lightbox__img {
+  max-width: 100%;
+  max-height: calc(90vh - 52px);
+  object-fit: contain;
+  border-radius: 0;
+  border: none;
+}
+
 /* ─── Responsive ───────────────────────────────────────────────── */
 @media (max-width: 600px) {
   .nav-inner { gap: 16px; padding: 0 16px; }
   .page-wrap  { padding: 32px 16px 60px; }
   .home-hero h1 { font-size: 26px; }
   .cards-grid { grid-template-columns: 1fr; }
+  .v-card__head { flex-wrap: wrap; }
+  .ml-auto { margin-left: 0; }
 }
