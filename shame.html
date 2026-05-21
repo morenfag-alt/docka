@@ -11,7 +11,7 @@
 </head>
 <body>
 
-  <!-- ── Navigation ───────────────────────────────────────────── -->
+  <!-- ═══ Navigation ═══════════════════════════════════════════════ -->
   <header class="site-header">
     <nav class="nav-inner">
       <a class="nav-logo" href="index.html">Docka<span>.</span></a>
@@ -24,19 +24,17 @@
     </nav>
   </header>
 
-  <!-- ── Page Content ──────────────────────────────────────────── -->
+  <!-- ═══ Main ══════════════════════════════════════════════════════ -->
   <main class="page-wrap">
 
     <!-- Page Header -->
     <div class="page-hero">
       <h1><span class="icon">📋</span> Доска позора</h1>
-      <p>
-        Публичный реестр зафиксированных нарушений правил сообщества.
-        Каждая запись подтверждена скриншотом и содержит только факты.
-      </p>
+      <p>Публичный реестр зафиксированных нарушений правил сообщества. Каждая запись подтверждена скриншотом и содержит только факты.</p>
       <div class="notice-box">
         <strong>Цель раздела</strong> — поддержание порядка, дисциплины и соблюдение правил сайта.
-        Раздел не является инструментом травли или унижения.
+        Раздел не является инструментом травли или унижения. Контакты участников публикуются
+        исключительно для возможности урегулирования ситуации напрямую.
         Информация публикуется в соответствии с <a href="#" style="color:var(--accent)">внутренними правилами ресурса</a>.
         Участник вправе обратиться к администрации для уточнения или оспаривания записи.
       </div>
@@ -44,10 +42,10 @@
 
     <!-- Stats -->
     <div class="stats-strip">
-      <div class="stat-chip"><strong id="cnt-total">3</strong>Всего записей</div>
-      <div class="stat-chip"><strong id="cnt-active">1</strong>Активных</div>
-      <div class="stat-chip"><strong id="cnt-warning">1</strong>Предупреждений</div>
-      <div class="stat-chip"><strong id="cnt-resolved">1</strong>Закрытых</div>
+      <div class="stat-chip"><strong>3</strong>Всего записей</div>
+      <div class="stat-chip"><strong>1</strong>Активных</div>
+      <div class="stat-chip"><strong>1</strong>Предупреждений</div>
+      <div class="stat-chip"><strong>1</strong>Закрытых</div>
     </div>
 
     <!-- Filters -->
@@ -58,140 +56,219 @@
       <button class="filter-btn" data-filter="resolved">Закрытые</button>
     </div>
 
-    <!-- Cards Grid -->
+    <!-- ═══ Cards ══════════════════════════════════════════════════ -->
     <div class="cards-grid" id="cards-grid">
 
-      <!-- ── Card 1 ── Активное нарушение ── -->
+      <!-- ── Card 1 ── active ── -->
       <article class="v-card" data-status="active">
-        <div class="v-card__shot" onclick="openLightbox('screenshots/placeholder-1.svg')">
-          <img src="screenshots/placeholder-1.svg" alt="Скриншот нарушения — violator_nick, спам в чате" loading="lazy" />
-          <span class="v-card__shot-label">📷 Скриншот нарушения</span>
+
+        <!-- Screenshot -->
+        <div class="v-card__shot" onclick="openLightbox('screenshots/placeholder-1.svg', 'Спам в чате — violator_nick')">
+          <img src="screenshots/placeholder-1.svg" alt="Скриншот нарушения" loading="lazy" />
+          <span class="v-card__shot-label">📷 Доказательство нарушения</span>
           <span class="v-card__zoom-hint">🔍 Увеличить</span>
         </div>
+
         <div class="v-card__body">
+
+          <!-- Offender -->
+          <div class="v-card__section-label">Нарушитель</div>
           <div class="v-card__head">
-            <div class="v-card__avatar">V</div>
-            <div>
+            <div class="v-card__avatar" style="--av-color:#e35b5b">V</div>
+            <div class="v-card__head-info">
               <div class="v-card__nick">violator_nick</div>
               <div class="v-card__id">ID #00412</div>
             </div>
+            <span class="badge badge--active ml-auto">● Активно</span>
           </div>
+
+          <!-- Contact tags -->
+          <div class="v-card__tags">
+            <a class="tag tag--discord" href="https://discord.com/users/000000000000000001" target="_blank" rel="noopener" title="Написать в Discord">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg>
+              violator_nick#0001
+            </a>
+            <a class="tag tag--telegram" href="https://t.me/violatornick" target="_blank" rel="noopener" title="Написать в Telegram">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+              @violatornick
+            </a>
+          </div>
+
+          <!-- Violation description -->
           <p class="v-card__desc">
             <strong>Нарушение п.&nbsp;3.1 — массовый спам.</strong>
             Участник разместил 14 идентичных сообщений в общем чате в течение 3 минут,
-            засоряя канал и мешая коммуникации других пользователей.
+            засоряя канал и нарушая коммуникацию других участников.
           </p>
-          <div class="v-card__meta">
-            <span class="v-card__date">Дата фиксации: <span>12 апр. 2026</span></span>
-            <span class="badge badge--active">● Активно</span>
+
+          <!-- Reporter row -->
+          <div class="v-card__reporter">
+            <span class="reporter-label">Зафиксировал:</span>
+            <div class="reporter-user">
+              <div class="v-card__avatar v-card__avatar--sm" style="--av-color:#5b8de3">M</div>
+              <span class="reporter-nick">moderator_one</span>
+              <span class="reporter-role">Модератор</span>
+            </div>
           </div>
+
+          <!-- Meta -->
+          <div class="v-card__meta">
+            <span class="v-card__date">📅 <span>12 апреля 2026</span></span>
+          </div>
+
         </div>
       </article>
 
-      <!-- ── Card 2 ── Предупреждение ── -->
+      <!-- ── Card 2 ── warning ── -->
       <article class="v-card" data-status="warning">
-        <div class="v-card__shot" onclick="openLightbox('screenshots/placeholder-3.svg')">
-          <img src="screenshots/placeholder-3.svg" alt="Скриншот нарушения — nick_three, провокация" loading="lazy" />
-          <span class="v-card__shot-label">📷 Скриншот нарушения</span>
+
+        <div class="v-card__shot" onclick="openLightbox('screenshots/placeholder-3.svg', 'Провокация — nick_three')">
+          <img src="screenshots/placeholder-3.svg" alt="Скриншот нарушения" loading="lazy" />
+          <span class="v-card__shot-label">📷 Доказательство нарушения</span>
           <span class="v-card__zoom-hint">🔍 Увеличить</span>
         </div>
+
         <div class="v-card__body">
+
+          <div class="v-card__section-label">Нарушитель</div>
           <div class="v-card__head">
-            <div class="v-card__avatar">N</div>
-            <div>
+            <div class="v-card__avatar" style="--av-color:#e3aa5b">N</div>
+            <div class="v-card__head-info">
               <div class="v-card__nick">nick_three</div>
               <div class="v-card__id">ID #00389</div>
             </div>
+            <span class="badge badge--warning ml-auto">⚠ Предупреждение</span>
           </div>
+
+          <div class="v-card__tags">
+            <a class="tag tag--discord" href="https://discord.com/users/000000000000000002" target="_blank" rel="noopener" title="Написать в Discord">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg>
+              nick_three#2244
+            </a>
+          </div>
+
           <p class="v-card__desc">
             <strong>Нарушение п.&nbsp;2.4 — провокация и систематический оффтоп.</strong>
             Повторное нарушение в течение 7 дней: намеренное уклонение от темы обсуждения
-            и провоцирование конфликтов между участниками форума.
+            и провоцирование конфликтов между участниками.
           </p>
-          <div class="v-card__meta">
-            <span class="v-card__date">Дата фиксации: <span>10 мая 2026</span></span>
-            <span class="badge badge--warning">⚠ Предупреждение</span>
+
+          <div class="v-card__reporter">
+            <span class="reporter-label">Зафиксировал:</span>
+            <div class="reporter-user">
+              <div class="v-card__avatar v-card__avatar--sm" style="--av-color:#4caf7d">A</div>
+              <span class="reporter-nick">admin_root</span>
+              <span class="reporter-role">Администратор</span>
+            </div>
           </div>
+
+          <div class="v-card__meta">
+            <span class="v-card__date">📅 <span>10 мая 2026</span></span>
+          </div>
+
         </div>
       </article>
 
-      <!-- ── Card 3 ── Закрытое ── -->
+      <!-- ── Card 3 ── resolved ── -->
       <article class="v-card" data-status="resolved">
-        <div class="v-card__shot" onclick="openLightbox('screenshots/placeholder-2.svg')">
-          <img src="screenshots/placeholder-2.svg" alt="Скриншот нарушения — user_two, запрещённый контент" loading="lazy" />
-          <span class="v-card__shot-label">📷 Скриншот нарушения</span>
+
+        <div class="v-card__shot" onclick="openLightbox('screenshots/placeholder-2.svg', 'Запрещённый контент — user_two')">
+          <img src="screenshots/placeholder-2.svg" alt="Скриншот нарушения" loading="lazy" />
+          <span class="v-card__shot-label">📷 Доказательство нарушения</span>
           <span class="v-card__zoom-hint">🔍 Увеличить</span>
         </div>
+
         <div class="v-card__body">
+
+          <div class="v-card__section-label">Нарушитель</div>
           <div class="v-card__head">
-            <div class="v-card__avatar">U</div>
-            <div>
+            <div class="v-card__avatar" style="--av-color:#7a8099">U</div>
+            <div class="v-card__head-info">
               <div class="v-card__nick">user_two</div>
               <div class="v-card__id">ID #00201</div>
             </div>
+            <span class="badge badge--resolved ml-auto">✓ Закрыто</span>
           </div>
+
+          <div class="v-card__tags">
+            <a class="tag tag--telegram" href="https://t.me/usertwo" target="_blank" rel="noopener" title="Написать в Telegram">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+              @usertwo
+            </a>
+          </div>
+
           <p class="v-card__desc">
             <strong>Нарушение п.&nbsp;5.2 — публикация запрещённого контента.</strong>
             Участник разместил материалы, нарушающие правила ресурса (п.&nbsp;5.2).
             Нарушение признано, санкция применена, вопрос закрыт.
           </p>
-          <div class="v-card__meta">
-            <span class="v-card__date">Дата фиксации: <span>28 мар. 2026</span></span>
-            <span class="badge badge--resolved">✓ Закрыто</span>
+
+          <div class="v-card__reporter">
+            <span class="reporter-label">Зафиксировал:</span>
+            <div class="reporter-user">
+              <div class="v-card__avatar v-card__avatar--sm" style="--av-color:#5b8de3">M</div>
+              <span class="reporter-nick">moderator_one</span>
+              <span class="reporter-role">Модератор</span>
+            </div>
           </div>
+
+          <div class="v-card__meta">
+            <span class="v-card__date">📅 <span>28 марта 2026</span></span>
+          </div>
+
         </div>
       </article>
 
     </div><!-- /cards-grid -->
-
   </main>
 
-  <!-- ── Lightbox ───────────────────────────────────────────────── -->
-  <div class="lightbox" id="lightbox" onclick="closeLightbox()">
-    <button class="lightbox__close" onclick="closeLightbox()" aria-label="Закрыть">&times;</button>
-    <img class="lightbox__img" id="lightbox-img" src="" alt="Скриншот нарушения" />
+  <!-- ═══ Lightbox ═════════════════════════════════════════════════ -->
+  <div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+    <div class="lightbox__inner">
+      <div class="lightbox__topbar">
+        <span id="lightbox-title" class="lightbox__title"></span>
+        <button class="lightbox__close" onclick="closeLightbox()" aria-label="Закрыть">&times;</button>
+      </div>
+      <img class="lightbox__img" id="lightbox-img" src="" alt="Скриншот нарушения" />
+    </div>
   </div>
 
-  <!-- ── Footer ────────────────────────────────────────────────── -->
+  <!-- ═══ Footer ═══════════════════════════════════════════════════ -->
   <footer class="site-footer">
-    © 2026 Docka. Все записи публикуются в соответствии с внутренними правилами ресурса.
+    © 2026 Docka. Все записи публикуются в соответствии с <a href="#" style="color:var(--accent)">внутренними правилами ресурса</a>.
   </footer>
 
-  <!-- ── Scripts ───────────────────────────────────────────────── -->
+  <!-- ═══ Scripts ══════════════════════════════════════════════════ -->
   <script>
     /* ── Lightbox ── */
-    function openLightbox(src) {
+    function openLightbox(src, title) {
       document.getElementById('lightbox-img').src = src;
+      document.getElementById('lightbox-title').textContent = title || 'Скриншот нарушения';
       document.getElementById('lightbox').classList.add('open');
       document.body.style.overflow = 'hidden';
     }
-    function closeLightbox() {
+    function closeLightbox(e) {
+      if (e && e.target !== e.currentTarget && !e.target.classList.contains('lightbox__close')) return;
       document.getElementById('lightbox').classList.remove('open');
       document.body.style.overflow = '';
     }
-    document.addEventListener('keydown', e => {
-      if (e.key === 'Escape') closeLightbox();
-    });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') { document.getElementById('lightbox').classList.remove('open'); document.body.style.overflow = ''; } });
 
-    /* ── Filter ── */
+    /* ── Filters ── */
     const filterBtns = document.querySelectorAll('.filter-btn');
-    const cards = document.querySelectorAll('.v-card');
+    const allCards   = document.querySelectorAll('.v-card');
 
     filterBtns.forEach(btn => {
       btn.addEventListener('click', () => {
         filterBtns.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
-
         const filter = btn.dataset.filter;
         let visible = 0;
-
-        cards.forEach(card => {
-          const match = filter === 'all' || card.dataset.status === filter;
-          card.style.display = match ? '' : 'none';
-          if (match) visible++;
+        allCards.forEach(card => {
+          const show = filter === 'all' || card.dataset.status === filter;
+          card.style.display = show ? '' : 'none';
+          if (show) visible++;
         });
-
-        // show empty state if no cards match
         const existing = document.querySelector('.empty-state');
         if (existing) existing.remove();
         if (visible === 0) {
