@@ -44,17 +44,7 @@ body {
 a { text-decoration: none; color: inherit; }
 img { display: block; max-width: 100%; }
 
-/* ── скрыть дефолтный курсор ── */
-body, a, button, [role="button"] { cursor: none !important; }
-#custom-cursor { position: fixed; top: 0; left: 0; width: 20px; height: 20px;
-  pointer-events: none; z-index: 99999; transform: translate3d(-100px,-100px,0);
-  will-change: transform; transition: opacity .2s; }
-#custom-cursor svg { width: 20px; height: 20px;
-  filter: drop-shadow(0 1px 2px rgba(0,0,0,.3)); }
-#custom-cursor svg .cursor-fill  { fill: #1a1a1a; }
-#custom-cursor svg .cursor-stroke { stroke: #f5c800; }
-#cursor-trail-canvas { position: fixed; inset: 0; width: 100%; height: 100%;
-  pointer-events: none; z-index: 99998; }
+/* курсор — стандартный */
 </style>
 
 
@@ -203,30 +193,8 @@ body, a, button, [role="button"] { cursor: none !important; }
   text-transform: uppercase; opacity: .85;
 }
 
-/* ══ ФИЛЬТРЫ ══════════════════════════════════ */
-.filters {
-  display: flex; gap: 8px; margin-bottom: 28px;
-  flex-wrap: wrap; justify-content: center;
-}
-.filter-btn {
-  background: var(--red);
-  border: 3px solid var(--red2);
-  border-radius: 3px;
-  padding: 6px 18px;
-  font-family: var(--font-h);
-  font-size: .85rem; font-weight: 600;
-  letter-spacing: .05em; text-transform: uppercase;
-  color: var(--white);
-  cursor: pointer; transition: all .15s;
-  box-shadow: 2px 2px 0 rgba(0,0,0,.25);
-}
-.filter-btn:hover { background: var(--red2); transform: translateY(-1px); }
-.filter-btn.active {
-  background: var(--black);
-  border-color: var(--black);
-  color: var(--yellow);
-  box-shadow: 2px 2px 0 rgba(0,0,0,.5);
-}
+/* ══ ФИЛЬТРЫ — скрыты ════════════════════════ */
+.filters { display: none; }
 
 /* ══ ПОДПИСЬ ВНИЗУ СТЕНДА ═════════════════════ */
 .board-slogan {
@@ -519,13 +487,13 @@ body, a, button, [role="button"] { cursor: none !important; }
   <div class="board-frame">
 
     <div class="board-hero">
-      <img class="board-mascot" src="trollyashka.png"
-           alt="Тролляшка" onerror="this.style.display='none'">
+      <img class="board-mascot" src="mascot.png"
+           alt="Маскот" onerror="this.style.display='none'">
       <div class="board-title-block">
         <div class="board-subtitle">Орган административной комиссии сообщества</div>
         <h1 class="board-title">Доска позора</h1>
       </div>
-      <img class="board-mascot-right" src="trollyashka.png"
+      <img class="board-mascot-right" src="mascot.png"
            alt="" onerror="this.style.display='none'">
     </div>
 
@@ -763,7 +731,7 @@ body, a, button, [role="button"] { cursor: none !important; }
 </main>
 
 
-<!-- ══ ЛАЙТБОКС ══════════════════════════════════════════════════ -->
+<!-- ══ FOOTER ════════════════════════════════════════════════════ -->
 <div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
   <div class="lightbox__inner">
     <div class="lightbox__topbar">
@@ -810,92 +778,7 @@ function closeLightbox(e) {
 }
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
 
-/* ── фильтрация карточек ── */
-const filterBtns = document.querySelectorAll('.filter-btn');
-const allCards   = document.querySelectorAll('.v-card');
-filterBtns.forEach(btn => {
-  btn.addEventListener('click', () => {
-    filterBtns.forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    const filter = btn.dataset.filter;
-    let visible = 0;
-    allCards.forEach(card => {
-      const show = filter === 'all' || card.dataset.status === filter;
-      card.style.display = show ? '' : 'none';
-      if (show) visible++;
-    });
-    const ex = document.querySelector('.empty-state');
-    if (ex) ex.remove();
-    if (visible === 0) {
-      const el = document.createElement('div');
-      el.className = 'empty-state';
-      el.innerHTML = '<div class="big">📭</div>Нарушений в этой категории не найдено.';
-      document.getElementById('cards-grid').appendChild(el);
-    }
-  });
-});
-
-/* ── кастомный курсор + трейл ── */
-(function(){
-  'use strict';
-  if (window.matchMedia && window.matchMedia('(pointer:coarse)').matches) return;
-  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion:reduce)').matches) return;
-  const cursor = document.getElementById('custom-cursor');
-  const canvas = document.getElementById('cursor-trail-canvas');
-  const ctx    = canvas.getContext('2d');
-  let mouseX = -100, mouseY = -100, cursorX = -100, cursorY = -100, visible = false;
-  const LERP = 0.25, TRAIL_LENGTH = 18, trail = [];
-
-  function resize() {
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
-    canvas.width  = window.innerWidth  * dpr;
-    canvas.height = window.innerHeight * dpr;
-    canvas.style.width  = window.innerWidth  + 'px';
-    canvas.style.height = window.innerHeight + 'px';
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-  }
-
-  function hexToRgba(hex, alpha) {
-    hex = hex.replace('#','');
-    if (hex.length === 3) hex = hex.split('').map(c => c+c).join('');
-    const n = parseInt(hex, 16);
-    return 'rgba('+((n>>16)&255)+','+((n>>8)&255)+','+(n&255)+','+alpha+')';
-  }
-
-  window.addEventListener('mousemove', e => {
-    mouseX = e.clientX; mouseY = e.clientY;
-    if (!visible) { visible = true; cursor.style.opacity = '1'; cursorX = mouseX; cursorY = mouseY; }
-  });
-  document.addEventListener('mouseleave', () => { visible = false; cursor.style.opacity = '0'; });
-  window.addEventListener('resize', resize);
-  resize();
-
-  function tick() {
-    cursorX += (mouseX - cursorX) * LERP;
-    cursorY += (mouseY - cursorY) * LERP;
-    cursor.style.transform = 'translate3d('+cursorX+'px,'+cursorY+'px,0)';
-    trail.push({ x: cursorX+4, y: cursorY+4 });
-    if (trail.length > TRAIL_LENGTH) trail.shift();
-    ctx.clearRect(0, 0, canvas.width / (Math.min(window.devicePixelRatio||1,2)),
-                        canvas.height / (Math.min(window.devicePixelRatio||1,2)));
-    if (trail.length > 2 && visible) {
-      ctx.lineCap = 'round'; ctx.lineJoin = 'round';
-      for (let i = 1; i < trail.length; i++) {
-        const t = i / trail.length;
-        const prev = trail[i-1], curr = trail[i];
-        const speed = Math.hypot(curr.x - prev.x, curr.y - prev.y);
-        const alpha = Math.min(1, speed * 0.1) * t * 0.55;
-        if (alpha < 0.01) continue;
-        ctx.beginPath(); ctx.moveTo(prev.x, prev.y); ctx.lineTo(curr.x, curr.y);
-        ctx.lineWidth = 1.5 + t * 2.5;
-        ctx.strokeStyle = hexToRgba('#cc1f1f', alpha);
-        ctx.stroke();
-      }
-    }
-    requestAnimationFrame(tick);
-  }
-  requestAnimationFrame(tick);
-})();
+/* фильтры удалены */
 </script>
 </body>
 </html>
