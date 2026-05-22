@@ -3,782 +3,677 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Доска позора</title>
-<meta name="description" content="Публичный реестр нарушителей правил сообщества.">
+<title>ДОСКА ПОЗОРА — Реестр нарушителей</title>
+<meta name="description" content="Публичный реестр токсичных игроков и нарушителей правил сообщества.">
 <link rel="icon" href="logo.png" type="image/png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=PT+Sans:wght@400;700&display=swap" rel="stylesheet">
-<style>
-/* ══════════════════════════════════════════════
-   СОВЕТСКАЯ ДОСКА ПОЗОРА — базовые переменные
-═══════════════════════════════════════════════ */
-:root {
-  --yellow:   #f5c800;
-  --yellow2:  #e8b800;
-  --red:      #cc1f1f;
-  --red2:     #a81515;
-  --black:    #1a1a1a;
-  --white:    #f9f5e8;
-  --gray:     #888;
-  --border:   #c8a800;
-  --card-bg:  #f0ead6;
-  --font-h:   'Oswald', 'Arial Narrow', sans-serif;
-  --font-b:   'PT Sans', 'Arial', sans-serif;
-}
-
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-
-body {
-  background: var(--yellow);
-  background-image:
-    repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(0,0,0,0.04) 40px),
-    repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(0,0,0,0.04) 40px);
-  min-height: 100vh;
-  font-family: var(--font-b);
-  color: var(--black);
-  overflow-x: hidden;
-}
-
-a { text-decoration: none; color: inherit; }
-img { display: block; max-width: 100%; }
-
-/* курсор — стандартный */
-</style>
-
-
-<style>
-/* ══ ШАПКА ════════════════════════════════════ */
-.site-header {
-  background: var(--red);
-  border-bottom: 5px solid var(--red2);
-  position: sticky; top: 0; z-index: 200;
-  box-shadow: 0 4px 0 rgba(0,0,0,.35);
-}
-.nav-inner {
-  max-width: 1100px; margin: 0 auto;
-  padding: 0 24px; height: 54px;
-  display: flex; align-items: center; gap: 24px;
-}
-.nav-logo {
-  font-family: var(--font-h); font-weight: 700;
-  font-size: 1.2rem; letter-spacing: .06em;
-  color: var(--white); white-space: nowrap;
-  text-shadow: 1px 1px 0 rgba(0,0,0,.4);
-}
-.nav-logo span { color: var(--yellow); }
-.nav-links { display: flex; gap: 2px; list-style: none; margin-left: auto; }
-.nav-links a {
-  padding: 6px 14px; border-radius: 4px;
-  font-family: var(--font-h); font-size: .85rem;
-  font-weight: 600; letter-spacing: .04em;
-  color: rgba(255,255,255,.75);
-  transition: background .15s, color .15s;
-  text-transform: uppercase;
-}
-.nav-links a:hover { background: rgba(0,0,0,.2); color: #fff; }
-.nav-links a.active { background: var(--yellow); color: var(--red2); }
-
-/* ══ ОБЁРТКА СТРАНИЦЫ ═════════════════════════ */
-.page-wrap {
-  max-width: 1100px; margin: 0 auto;
-  padding: 0 24px 80px;
-}
-
-/* ══ ГЛАВНЫЙ СТЕНД ════════════════════════════ */
-.board-frame {
-  background: var(--yellow2);
-  border: 8px solid var(--red);
-  border-radius: 6px;
-  box-shadow: 0 6px 0 rgba(0,0,0,.35), inset 0 0 0 3px rgba(0,0,0,.12);
-  margin: 32px 0 40px;
-  padding: 20px 28px 28px;
-  position: relative;
-}
-
-/* уголки */
-.board-frame::before,
-.board-frame::after {
-  content: '';
-  position: absolute;
-  width: 22px; height: 22px;
-  background: var(--red2);
-  border-radius: 50%;
-  top: 14px;
-}
-.board-frame::before { left: 18px; }
-.board-frame::after  { right: 18px; }
-
-/* ══ ЗАГОЛОВОК ДОСКИ ══════════════════════════ */
-.board-title {
-  text-align: center;
-  font-family: var(--font-h);
-  font-size: clamp(2.4rem, 7vw, 5rem);
-  font-weight: 700;
-  letter-spacing: .06em;
-  text-transform: uppercase;
-  color: var(--red);
-  text-shadow: 2px 2px 0 rgba(0,0,0,.18), -1px -1px 0 rgba(0,0,0,.1);
-  line-height: 1;
-  margin: 18px 0 10px;
-}
-
-.board-subtitle {
-  text-align: center;
-  font-family: var(--font-h);
-  font-size: clamp(.7rem, 1.5vw, .95rem);
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  color: var(--black);
-  opacity: .7;
-  margin-bottom: 8px;
-}
-
-/* горизонтальная линия под заголовком */
-.board-divider {
-  border: none;
-  height: 4px;
-  background: linear-gradient(90deg, transparent, var(--red), transparent);
-  margin: 14px 40px 24px;
-  opacity: .5;
-}
-</style>
-
-
-<style>
-/* ══ ГЕРОЙ-ЗОНА (тролляшка + заголовок) ══════ */
-.board-hero {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 16px;
-  margin-bottom: 8px;
-}
-.board-mascot {
-  flex-shrink: 0;
-  width: clamp(70px, 10vw, 120px);
-  filter: drop-shadow(2px 4px 0 rgba(0,0,0,.25));
-  image-rendering: auto;
-}
-.board-title-block { flex: 1; text-align: center; }
-.board-mascot-right {
-  flex-shrink: 0;
-  width: clamp(70px, 10vw, 120px);
-  transform: scaleX(-1);
-  filter: drop-shadow(-2px 4px 0 rgba(0,0,0,.25));
-}
-
-/* ══ СТАТИСТИЧЕСКАЯ ПОЛОСА ════════════════════ */
-.stats-strip {
-  display: flex; flex-wrap: wrap; gap: 10px;
-  margin-bottom: 28px; justify-content: center;
-}
-.stat-chip {
-  background: var(--red);
-  border: 3px solid var(--red2);
-  border-radius: 4px;
-  padding: 10px 22px;
-  text-align: center;
-  color: var(--white);
-  font-family: var(--font-h);
-  box-shadow: 2px 2px 0 rgba(0,0,0,.3);
-}
-.stat-chip strong {
-  display: block; font-size: 1.8rem;
-  font-weight: 700; line-height: 1; color: var(--yellow);
-}
-.stat-chip span {
-  font-size: .7rem; letter-spacing: .08em;
-  text-transform: uppercase; opacity: .85;
-}
-
-/* ══ ФИЛЬТРЫ — скрыты ════════════════════════ */
-.filters { display: none; }
-
-/* ══ ПОДПИСЬ ВНИЗУ СТЕНДА ═════════════════════ */
-.board-slogan {
-  text-align: center;
-  font-family: var(--font-h);
-  font-size: clamp(.75rem, 1.6vw, 1rem);
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  color: var(--black);
-  opacity: .65;
-  margin-top: 4px;
-  margin-bottom: 0;
-}
-</style>
-
-
-<style>
-/* ══ СЕТКА КАРТОЧЕК ═══════════════════════════ */
-.cards-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 24px;
-}
-@media (max-width: 600px) { .cards-grid { grid-template-columns: 1fr; } }
-
-/* ══ КАРТОЧКА НАРУШИТЕЛЯ ══════════════════════ */
-.v-card {
-  background: var(--card-bg);
-  border: 4px solid var(--black);
-  border-radius: 2px;
-  overflow: hidden;
-  box-shadow: 5px 5px 0 rgba(0,0,0,.45);
-  transition: transform .2s, box-shadow .2s;
-  position: relative;
-}
-.v-card:hover {
-  transform: translateY(-4px) rotate(-0.4deg);
-  box-shadow: 8px 8px 0 rgba(0,0,0,.5);
-}
-
-/* цветная верхняя полоска по статусу */
-.v-card[data-status="active"]   { border-top: 7px solid var(--red); }
-.v-card[data-status="warning"]  { border-top: 7px solid #d97706; }
-.v-card[data-status="resolved"] { border-top: 7px solid #3a7a3a; }
-
-/* ── скриншот ── */
-.v-card__shot {
-  position: relative; cursor: pointer;
-  background: #222; overflow: hidden;
-}
-.v-card__shot img {
-  width: 100%; height: 190px;
-  object-fit: cover;
-  filter: grayscale(100%) contrast(1.1) brightness(.92);
-  transition: filter .3s, transform .3s;
-  display: block;
-}
-.v-card:hover .v-card__shot img {
-  filter: grayscale(80%) contrast(1.05);
-  transform: scale(1.03);
-}
-.v-card__shot-overlay {
-  position: absolute; inset: 0;
-  display: flex; align-items: flex-end; justify-content: space-between;
-  padding: 8px 10px;
-  background: linear-gradient(to top, rgba(0,0,0,.7) 0%, transparent 55%);
-  pointer-events: none;
-}
-.v-card__shot-label {
-  display: inline-flex; align-items: center; gap: 4px;
-  background: rgba(0,0,0,.75); color: #ddd;
-  font-family: var(--font-h); font-size: .7rem;
-  letter-spacing: .06em; text-transform: uppercase;
-  padding: 3px 9px; border-radius: 2px; pointer-events: auto;
-}
-.v-card__zoom-hint {
-  display: inline-flex; align-items: center; gap: 4px;
-  background: rgba(204,31,31,.85); color: #fff;
-  font-family: var(--font-h); font-size: .7rem;
-  letter-spacing: .06em; text-transform: uppercase;
-  padding: 3px 9px; border-radius: 2px;
-  opacity: 0; transition: opacity .2s; pointer-events: auto;
-}
-.v-card:hover .v-card__zoom-hint { opacity: 1; }
-
-/* ── тело карточки ── */
-.v-card__body { padding: 16px; }
-
-.v-card__header-row {
-  display: flex; align-items: center;
-  justify-content: space-between; gap: 8px;
-  margin-bottom: 14px; flex-wrap: wrap;
-}
-.v-card__date {
-  font-family: var(--font-h); font-size: .75rem;
-  color: #666; letter-spacing: .03em;
-  display: inline-flex; align-items: center; gap: 4px;
-}
-
-/* секционный лейбл */
-.v-card__section-label {
-  font-family: var(--font-h); font-size: .65rem;
-  font-weight: 700; letter-spacing: .12em;
-  text-transform: uppercase; color: #888;
-  margin-bottom: 8px;
-}
-
-/* нарушитель-блок */
-.v-card__offender {
-  background: rgba(0,0,0,.04);
-  border: 1px solid rgba(0,0,0,.12);
-  border-radius: 3px;
-  padding: 12px; margin-bottom: 14px;
-}
-.v-card__user {
-  display: flex; align-items: center; gap: 10px; margin-bottom: 10px;
-}
-.v-card__user--sm { margin-bottom: 0; }
-.v-card__avatar {
-  width: 38px; height: 38px; border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  font-family: var(--font-h); font-size: .95rem; font-weight: 700;
-  flex-shrink: 0; text-transform: uppercase; border: 2px solid rgba(0,0,0,.2);
-  background: color-mix(in srgb, var(--av-color, #888) 18%, #e0d8c0);
-  color: var(--av-color, #888);
-}
-.v-card__avatar--sm { width: 26px; height: 26px; font-size: .72rem; border-width: 1.5px; }
-.v-card__user-info  { flex: 1; min-width: 0; }
-.v-card__nick {
-  font-family: var(--font-h); font-weight: 700;
-  font-size: 1rem; color: var(--black);
-  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-}
-.v-card__nick--sm { font-size: .84rem; }
-.v-card__uid { font-size: .72rem; color: #888; margin-top: 1px; }
-
-/* контакт */
-.contact-label { display: block; font-size: .7rem; color: #888; margin-bottom: 7px; font-weight: 500; }
-.v-card__tags { display: flex; flex-wrap: wrap; gap: 6px; }
-.tag {
-  display: inline-flex; align-items: center; gap: 6px;
-  padding: 5px 11px; border-radius: 3px;
-  font-family: var(--font-h); font-size: .74rem; font-weight: 600;
-  letter-spacing: .03em; white-space: nowrap;
-  transition: filter .15s, transform .15s;
-}
-.tag:hover { filter: brightness(1.1); transform: translateY(-1px); }
-.tag svg { width: 12px; height: 12px; flex-shrink: 0; }
-.tag--discord  { background: rgba(88,101,242,.12); border: 1px solid rgba(88,101,242,.3); color: #6470ee; }
-.tag--telegram { background: rgba(0,136,204,.1);  border: 1px solid rgba(0,136,204,.28); color: #0a8fc4; }
-</style>
-
-
-<style>
-/* ── описание нарушения ── */
-.v-card__violation { margin-bottom: 14px; }
-.v-card__desc { font-size: .86rem; color: #444; line-height: 1.65; }
-.v-card__desc strong { color: var(--black); font-weight: 700; }
-
-/* ── строка двух участников ── */
-.v-card__people-row {
-  display: grid; grid-template-columns: 1fr 1fr;
-  border: 1px solid rgba(0,0,0,.12); border-radius: 3px; overflow: hidden;
-}
-@media (max-width: 480px) { .v-card__people-row { grid-template-columns: 1fr; } }
-.v-card__person { padding: 10px 12px; }
-.v-card__person--reporter {
-  background: rgba(0,0,0,.04);
-  border-right: 1px solid rgba(0,0,0,.12);
-}
-.v-card__person--violator { background: rgba(204,31,31,.06); }
-@media (max-width: 480px) {
-  .v-card__person--reporter { border-right: none; border-bottom: 1px solid rgba(0,0,0,.12); }
-}
-.v-card__role-badge {
-  display: inline-block; font-family: var(--font-h);
-  font-size: .62rem; font-weight: 700;
-  padding: 2px 8px; border-radius: 2px; margin-top: 3px;
-  letter-spacing: .04em; text-transform: uppercase;
-}
-.v-card__role-badge--admin   { background: rgba(30,120,60,.1);  color: #1e7840; border: 1px solid rgba(30,120,60,.2); }
-.v-card__role-badge--mod     { background: rgba(0,100,200,.08); color: #1055b0; border: 1px solid rgba(0,100,200,.2); }
-.v-card__role-badge--violator{ background: rgba(204,31,31,.1);  color: var(--red); border: 1px solid rgba(204,31,31,.22); }
-
-/* ── бейджи статуса ── */
-.badge {
-  display: inline-flex; align-items: center; gap: 5px;
-  font-family: var(--font-h); font-size: .7rem;
-  font-weight: 700; letter-spacing: .06em;
-  text-transform: uppercase; padding: 4px 12px;
-  border-radius: 2px;
-  box-shadow: 1px 1px 0 rgba(0,0,0,.2);
-}
-.badge--active   { background: var(--red);   color: #fff; }
-.badge--warning  { background: #d97706;       color: #fff; }
-.badge--resolved { background: #2e7d32;       color: #fff; }
-
-/* ══ ЛАЙТБОКС ══════════════════════════════════ */
-.lightbox {
-  display: none; position: fixed; inset: 0;
-  background: rgba(0,0,0,.88); z-index: 999;
-  align-items: center; justify-content: center;
-  padding: 24px; backdrop-filter: blur(4px);
-}
-.lightbox.open { display: flex; }
-.lightbox__inner {
-  display: flex; flex-direction: column;
-  max-width: 92vw; max-height: 90vh;
-  background: var(--card-bg); border: 4px solid var(--black);
-  border-radius: 2px; overflow: hidden;
-  box-shadow: 8px 8px 0 rgba(0,0,0,.6);
-}
-.lightbox__topbar {
-  display: flex; align-items: center;
-  justify-content: space-between;
-  padding: 10px 16px; border-bottom: 3px solid var(--black);
-  background: var(--red); gap: 16px;
-}
-.lightbox__title {
-  font-family: var(--font-h); font-size: .85rem;
-  color: #fff; letter-spacing: .04em;
-  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-}
-.lightbox__close {
-  background: var(--black); border: 2px solid #444;
-  color: var(--yellow); cursor: pointer;
-  display: flex; align-items: center; justify-content: center;
-  width: 28px; height: 28px; border-radius: 2px;
-  font-family: var(--font-h); font-size: 1rem;
-  transition: background .15s; flex-shrink: 0;
-}
-.lightbox__close:hover { background: #333; }
-.lightbox__img {
-  max-width: 100%; max-height: calc(90vh - 52px); object-fit: contain;
-}
-
-/* ══ ПУСТОЕ СОСТОЯНИЕ ══════════════════════════ */
-.empty-state {
-  grid-column: 1/-1; text-align: center;
-  padding: 60px 20px;
-  font-family: var(--font-h); font-size: 1rem; color: #888;
-  letter-spacing: .06em; text-transform: uppercase;
-}
-.empty-state .big { font-size: 42px; margin-bottom: 14px; }
-
-/* ══ FOOTER ════════════════════════════════════ */
-.site-footer {
-  border-top: 5px solid var(--red);
-  padding: 20px 24px;
-  background: var(--red);
-  text-align: center;
-  font-family: var(--font-h); font-size: .8rem;
-  color: rgba(255,255,255,.75);
-  letter-spacing: .05em; text-transform: uppercase;
-}
-.site-footer a { color: var(--yellow); transition: opacity .2s; }
-.site-footer a:hover { opacity: .8; }
-
-@media (max-width: 600px) {
-  .nav-inner { padding: 0 14px; gap: 12px; }
-  .page-wrap  { padding: 0 14px 60px; }
-  .board-frame { padding: 14px 14px 20px; margin: 16px 0 28px; }
-  .board-title { font-size: clamp(1.8rem, 9vw, 2.6rem); }
-}
-</style>
-
-
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700;800;900&family=Golos+Text:wght@400;500;600&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<script src="theme.js"></script>
+<link rel="stylesheet" href="shame.css">
 </head>
 <body>
 
-<!-- ══ ШАПКА ══════════════════════════════════ -->
+
+<!-- ══ BACKGROUND LAYERS ══════════════════════════════════════ -->
+<div class="cyber-bg" aria-hidden="true">
+  <div class="cyber-grid"></div>
+  <div class="orb orb--red"></div>
+  <div class="orb orb--purple"></div>
+  <div class="orb orb--blue"></div>
+  <div class="scan-line"></div>
+</div>
+
+<!-- ══ HEADER ════════════════════════════════════════════════ -->
 <header class="site-header">
-  <div class="nav-inner">
-    <a href="index.html" class="nav-logo">шаб<span>лоны</span></a>
-    <nav>
-      <ul class="nav-links">
-        <li><a href="index.html">Главная</a></li>
-        <li><a href="templates.html">Шаблоны</a></li>
-        <li><a href="typing.html">Печать</a></li>
-        <li><a href="shame.html" class="active">Доска позора</a></li>
-      </ul>
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <img src="logo.png" alt="" onerror="this.style.display='none'">
+      шаб<span>лоны</span>
+    </a>
+    <nav class="main-nav">
+      <a href="index.html">Главная</a>
+      <a href="templates.html">Шаблоны</a>
+      <a href="typing.html">Печать</a>
+      <a href="shame.html" class="active">Доска позора</a>
     </nav>
+    <div class="header-actions">
+      <div class="online-indicator">
+        <span class="online-dot"></span>
+        <span class="online-count" id="onlineCount">247</span> онлайн
+      </div>
+      <button class="theme-btn" id="themeBtn" title="Сменить тему" aria-label="Сменить тему"></button>
+    </div>
   </div>
 </header>
 
+<!-- ══ MAIN ══════════════════════════════════════════════════ -->
 <main>
-<div class="page-wrap">
 
-  <!-- ══ ГЛАВНЫЙ СТЕНД ════════════════════════ -->
-  <div class="board-frame">
-
-    <div class="board-hero">
-      <img class="board-mascot" src="mascot.png"
-           alt="Маскот" onerror="this.style.display='none'">
-      <div class="board-title-block">
-        <div class="board-subtitle">Орган административной комиссии сообщества</div>
-        <h1 class="board-title">Доска позора</h1>
+  <!-- ── HERO BLOCK ──────────────────────────────────────────── -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-content">
+        <div class="hero-tag">
+          <span class="pulse-dot pulse-dot--red"></span>
+          <span class="mono">SYS://SHAME_REGISTRY_v2.6</span>
+        </div>
+        <h1 class="hero-title">
+          <span class="hero-title__line1">ДОСКА</span>
+          <span class="hero-title__line2">ПОЗОРА</span>
+          <span class="hero-title__glitch" aria-hidden="true">ПОЗОРА</span>
+        </h1>
+        <p class="hero-sub">Публичный реестр токсичных игроков, нарушителей правил и&nbsp;персонажей, которые сделали сообщество хуже. Никаких шансов на&nbsp;реабилитацию.</p>
+        <div class="hero-cta-row">
+          <button class="btn btn--danger" id="btnReport">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            Подать жалобу
+          </button>
+          <button class="btn btn--ghost" id="btnTop">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+            Топ нарушителей
+          </button>
+        </div>
       </div>
-      <img class="board-mascot-right" src="mascot.png"
-           alt="" onerror="this.style.display='none'">
+      <div class="hero-stats-panel">
+        <div class="stat-card stat-card--glow-red">
+          <div class="stat-card__icon">💀</div>
+          <div class="stat-card__value" data-count="47">0</div>
+          <div class="stat-card__label">В реестре</div>
+        </div>
+        <div class="stat-card stat-card--glow-orange">
+          <div class="stat-card__icon">🔥</div>
+          <div class="stat-card__value" data-count="12">0</div>
+          <div class="stat-card__label">Активных</div>
+        </div>
+        <div class="stat-card stat-card--glow-purple">
+          <div class="stat-card__icon">⚡</div>
+          <div class="stat-card__value" data-count="384">0</div>
+          <div class="stat-card__label">Жалоб</div>
+        </div>
+        <div class="stat-card stat-card--glow-blue">
+          <div class="stat-card__icon">🛡️</div>
+          <div class="stat-card__value" data-count="28">0</div>
+          <div class="stat-card__label">Закрытых</div>
+        </div>
+      </div>
     </div>
+  </section>
 
-    <hr class="board-divider">
+  <!-- ── MAIN CONTENT (cards + sidebar) ─────────────────────── -->
+  <div class="content-layout">
 
-    <!-- статистика -->
-    <div class="stats-strip">
-      <div class="stat-chip"><strong>3</strong><span>Всего записей</span></div>
-      <div class="stat-chip"><strong>1</strong><span>Активных</span></div>
-      <div class="stat-chip"><strong>1</strong><span>Предупреждений</span></div>
-      <div class="stat-chip"><strong>1</strong><span>Закрытых</span></div>
-    </div>
+    <!-- ── LEFT: CARDS ──────────────────────────────────────── -->
+    <div class="cards-column">
 
-    <!-- фильтры -->
-    <div class="filters">
-      <button class="filter-btn active" data-filter="all">Все записи</button>
-      <button class="filter-btn" data-filter="active">● Активные</button>
-      <button class="filter-btn" data-filter="warning">⚠ Предупреждение</button>
-      <button class="filter-btn" data-filter="resolved">✓ Закрытые</button>
-    </div>
-
-    <p class="board-slogan">В обществе не место бездельникам, пьяницам, дебоширам.</p>
-  </div>
-
-  <!-- ══ КАРТОЧКИ ══════════════════════════════ -->
-  <div class="cards-grid" id="cards-grid">
-
-
-    <!-- ══ Карточка 1 — active ══════════════════ -->
-    <article class="v-card" data-status="active">
-      <div class="v-card__shot" onclick="openLightbox('screenshots/placeholder-1.svg','Спам в чате — violator_nick')">
-        <img src="screenshots/placeholder-1.svg" alt="Скриншот нарушения" loading="lazy">
-        <div class="v-card__shot-overlay">
-          <span class="v-card__shot-label">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="11" height="11"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
-            Доказательство
-          </span>
-          <span class="v-card__zoom-hint">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="11" height="11"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35M11 8v6M8 11h6"/></svg>
-            Увеличить
-          </span>
+      <!-- filters & sort -->
+      <div class="toolbar">
+        <div class="filters" id="filters">
+          <button class="filter-btn active" data-filter="all">Все</button>
+          <button class="filter-btn" data-filter="active">
+            <span class="dot dot--red"></span>Активные
+          </button>
+          <button class="filter-btn" data-filter="warning">
+            <span class="dot dot--orange"></span>Предупреждение
+          </button>
+          <button class="filter-btn" data-filter="resolved">
+            <span class="dot dot--green"></span>Закрытые
+          </button>
+        </div>
+        <div class="sort-wrap">
+          <select class="sort-select" id="sortSelect">
+            <option value="newest">Новые</option>
+            <option value="toxic">Токсичность ↑</option>
+            <option value="reports">Жалобы ↑</option>
+          </select>
         </div>
       </div>
-      <div class="v-card__body">
-        <div class="v-card__header-row">
-          <span class="badge badge--active">● Активно</span>
-          <span class="v-card__date">12 апреля 2026</span>
-        </div>
-        <div class="v-card__offender">
-          <div class="v-card__section-label">Нарушитель</div>
-          <div class="v-card__user">
-            <div class="v-card__avatar" style="--av-color:#cc1f1f">V</div>
-            <div class="v-card__user-info">
-              <div class="v-card__nick">violator_nick</div>
-              <div class="v-card__uid">ID #00412</div>
+
+      <!-- cards grid -->
+      <div class="cards-grid" id="cardsGrid">
+
+
+        <!-- ── CARD 1 ── -->
+        <article class="v-card" data-status="active" data-toxic="94" data-reports="47" data-date="2026-05-20">
+          <div class="v-card__top-bar v-card__top-bar--red"></div>
+          <div class="v-card__screenshot" onclick="openLightbox('screenshots/placeholder-1.svg','D3STROYER_X — Массовый спам и угрозы')">
+            <img src="screenshots/placeholder-1.svg" alt="Скриншот" loading="lazy">
+            <div class="v-card__shot-overlay">
+              <span class="v-card__shot-badge">📸 Доказательство</span>
+              <span class="v-card__zoom">🔍 Увеличить</span>
             </div>
           </div>
-          <span class="contact-label">Написать нарушителю:</span>
-          <div class="v-card__tags">
-            <a class="tag tag--discord" href="https://discord.com/users/000000000000000001" target="_blank" rel="noopener">
-              <svg viewBox="0 0 24 24" fill="currentColor" width="12" height="12"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg>
-              violator_nick#0001
-            </a>
-            <a class="tag tag--telegram" href="https://t.me/violatornick" target="_blank" rel="noopener">
-              <svg viewBox="0 0 24 24" fill="currentColor" width="12" height="12"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
-              @violatornick
-            </a>
-          </div>
-        </div>
-        <div class="v-card__violation">
-          <div class="v-card__section-label">Нарушение</div>
-          <p class="v-card__desc"><strong>п.&nbsp;3.1 — массовый спам.</strong> Участник разместил 14 идентичных сообщений в общем чате в течение 3 минут, засоряя канал и нарушая коммуникацию других участников.</p>
-        </div>
-        <div class="v-card__people-row">
-          <div class="v-card__person v-card__person--reporter">
-            <div class="v-card__section-label">Выставил на доску</div>
-            <div class="v-card__user v-card__user--sm">
-              <div class="v-card__avatar v-card__avatar--sm" style="--av-color:#1055b0">M</div>
+          <div class="v-card__body">
+            <div class="v-card__header">
+              <span class="status-badge status-badge--active">● АКТИВНО</span>
+              <span class="v-card__date mono">20.05.2026</span>
+            </div>
+            <div class="v-card__user-block">
+              <div class="avatar avatar--red">D</div>
               <div class="v-card__user-info">
-                <div class="v-card__nick v-card__nick--sm">moderator_one</div>
-                <div class="v-card__role-badge v-card__role-badge--mod">Модератор</div>
+                <div class="v-card__nick">D3STROYER_X</div>
+                <div class="v-card__uid mono">ID #00412</div>
+              </div>
+              <div class="toxicity-badge toxicity-badge--critical">
+                <span class="mono">94%</span>
+                <span class="toxicity-label">ТОК</span>
+              </div>
+            </div>
+            <div class="toxicity-bar-wrap">
+              <div class="toxicity-bar-label">
+                <span>Уровень токсичности</span>
+                <span class="mono toxicity-value--red">CRITICAL</span>
+              </div>
+              <div class="toxicity-bar">
+                <div class="toxicity-bar__fill toxicity-bar__fill--red" style="--w:94%"></div>
+              </div>
+            </div>
+            <div class="v-card__reason">
+              <span class="reason-tag reason-tag--red">Массовый спам</span>
+              <span class="reason-tag reason-tag--red">Угрозы</span>
+            </div>
+            <p class="v-card__desc">Разослал <strong>47 идентичных сообщений</strong> с угрозами за 4 минуты. Игнорировал предупреждения модераторов, создавал alt-аккаунты для обхода бана.</p>
+            <div class="v-card__contacts">
+              <a class="contact-tag contact-tag--discord" href="#" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="currentColor" width="12" height="12"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg>
+                D3STROYER_X#6666
+              </a>
+            </div>
+            <div class="v-card__report-row">
+              <span class="reports-count">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/></svg>
+                <strong>47</strong> жалоб
+              </span>
+              <div class="v-card__actions">
+                <button class="card-btn card-btn--ghost" onclick="openDetail(this)">Подробнее</button>
+                <button class="card-btn card-btn--danger" onclick="reportUser(this)">Пожаловаться</button>
               </div>
             </div>
           </div>
-          <div class="v-card__person v-card__person--violator">
-            <div class="v-card__section-label">Нарушитель</div>
-            <div class="v-card__user v-card__user--sm">
-              <div class="v-card__avatar v-card__avatar--sm" style="--av-color:#cc1f1f">V</div>
+        </article>
+
+        <!-- ── CARD 2 ── -->
+        <article class="v-card" data-status="warning" data-toxic="71" data-reports="23" data-date="2026-05-15">
+          <div class="v-card__top-bar v-card__top-bar--orange"></div>
+          <div class="v-card__screenshot" onclick="openLightbox('screenshots/placeholder-3.svg','XAOS_MAKER — Провокации и оффтоп')">
+            <img src="screenshots/placeholder-3.svg" alt="Скриншот" loading="lazy">
+            <div class="v-card__shot-overlay">
+              <span class="v-card__shot-badge">📸 Доказательство</span>
+              <span class="v-card__zoom">🔍 Увеличить</span>
+            </div>
+          </div>
+          <div class="v-card__body">
+            <div class="v-card__header">
+              <span class="status-badge status-badge--warning">⚠ ПРЕДУПРЕЖДЕНИЕ</span>
+              <span class="v-card__date mono">15.05.2026</span>
+            </div>
+            <div class="v-card__user-block">
+              <div class="avatar avatar--orange">X</div>
               <div class="v-card__user-info">
-                <div class="v-card__nick v-card__nick--sm">violator_nick</div>
-                <div class="v-card__role-badge v-card__role-badge--violator">Нарушитель</div>
+                <div class="v-card__nick">XAOS_MAKER</div>
+                <div class="v-card__uid mono">ID #00389</div>
               </div>
+              <div class="toxicity-badge toxicity-badge--high">
+                <span class="mono">71%</span>
+                <span class="toxicity-label">ТОК</span>
+              </div>
+            </div>
+            <div class="toxicity-bar-wrap">
+              <div class="toxicity-bar-label">
+                <span>Уровень токсичности</span>
+                <span class="mono toxicity-value--orange">HIGH</span>
+              </div>
+              <div class="toxicity-bar">
+                <div class="toxicity-bar__fill toxicity-bar__fill--orange" style="--w:71%"></div>
+              </div>
+            </div>
+            <div class="v-card__reason">
+              <span class="reason-tag reason-tag--orange">Провокации</span>
+              <span class="reason-tag reason-tag--orange">Оффтоп</span>
+            </div>
+            <p class="v-card__desc">Повторное нарушение за 7 дней: <strong>намеренно провоцировал конфликты</strong> между участниками, систематически уводил дискуссии в оффтоп.</p>
+            <div class="v-card__contacts">
+              <a class="contact-tag contact-tag--discord" href="#" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="currentColor" width="12" height="12"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg>
+                XAOS_MAKER#3312
+              </a>
+              <a class="contact-tag contact-tag--telegram" href="#" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="currentColor" width="12" height="12"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+                @xaos_maker
+              </a>
+            </div>
+            <div class="v-card__report-row">
+              <span class="reports-count">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/></svg>
+                <strong>23</strong> жалобы
+              </span>
+              <div class="v-card__actions">
+                <button class="card-btn card-btn--ghost" onclick="openDetail(this)">Подробнее</button>
+                <button class="card-btn card-btn--danger" onclick="reportUser(this)">Пожаловаться</button>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- ── CARD 3 ── -->
+        <article class="v-card" data-status="active" data-toxic="88" data-reports="35" data-date="2026-05-18">
+          <div class="v-card__top-bar v-card__top-bar--red"></div>
+          <div class="v-card__screenshot" onclick="openLightbox('screenshots/placeholder-2.svg','NULL_TOXIN — Читы и скам')">
+            <img src="screenshots/placeholder-2.svg" alt="Скриншот" loading="lazy">
+            <div class="v-card__shot-overlay">
+              <span class="v-card__shot-badge">📸 Доказательство</span>
+              <span class="v-card__zoom">🔍 Увеличить</span>
+            </div>
+          </div>
+          <div class="v-card__body">
+            <div class="v-card__header">
+              <span class="status-badge status-badge--active">● АКТИВНО</span>
+              <span class="v-card__date mono">18.05.2026</span>
+            </div>
+            <div class="v-card__user-block">
+              <div class="avatar avatar--purple">N</div>
+              <div class="v-card__user-info">
+                <div class="v-card__nick">NULL_TOXIN</div>
+                <div class="v-card__uid mono">ID #00501</div>
+              </div>
+              <div class="toxicity-badge toxicity-badge--critical">
+                <span class="mono">88%</span>
+                <span class="toxicity-label">ТОК</span>
+              </div>
+            </div>
+            <div class="toxicity-bar-wrap">
+              <div class="toxicity-bar-label">
+                <span>Уровень токсичности</span>
+                <span class="mono toxicity-value--red">CRITICAL</span>
+              </div>
+              <div class="toxicity-bar">
+                <div class="toxicity-bar__fill toxicity-bar__fill--red" style="--w:88%"></div>
+              </div>
+            </div>
+            <div class="v-card__reason">
+              <span class="reason-tag reason-tag--red">Читы</span>
+              <span class="reason-tag reason-tag--red">Скам</span>
+            </div>
+            <p class="v-card__desc">Использование <strong>запрещённого ПО</strong> и попытки мошенничества: продавал «уникальные скрипты», которые оказались стилерами.</p>
+            <div class="v-card__contacts">
+              <a class="contact-tag contact-tag--telegram" href="#" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="currentColor" width="12" height="12"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+                @null_toxin
+              </a>
+            </div>
+            <div class="v-card__report-row">
+              <span class="reports-count">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/></svg>
+                <strong>35</strong> жалоб
+              </span>
+              <div class="v-card__actions">
+                <button class="card-btn card-btn--ghost" onclick="openDetail(this)">Подробнее</button>
+                <button class="card-btn card-btn--danger" onclick="reportUser(this)">Пожаловаться</button>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- ── CARD 4 ── -->
+        <article class="v-card" data-status="resolved" data-toxic="42" data-reports="9" data-date="2026-04-02">
+          <div class="v-card__top-bar v-card__top-bar--green"></div>
+          <div class="v-card__screenshot" onclick="openLightbox('screenshots/placeholder-2.svg','ghost_user99 — Запрещённый контент')">
+            <img src="screenshots/placeholder-2.svg" alt="Скриншот" loading="lazy">
+            <div class="v-card__shot-overlay">
+              <span class="v-card__shot-badge">📸 Доказательство</span>
+              <span class="v-card__zoom">🔍 Увеличить</span>
+            </div>
+          </div>
+          <div class="v-card__body">
+            <div class="v-card__header">
+              <span class="status-badge status-badge--resolved">✓ ЗАКРЫТО</span>
+              <span class="v-card__date mono">02.04.2026</span>
+            </div>
+            <div class="v-card__user-block">
+              <div class="avatar avatar--green">G</div>
+              <div class="v-card__user-info">
+                <div class="v-card__nick">ghost_user99</div>
+                <div class="v-card__uid mono">ID #00201</div>
+              </div>
+              <div class="toxicity-badge toxicity-badge--medium">
+                <span class="mono">42%</span>
+                <span class="toxicity-label">ТОК</span>
+              </div>
+            </div>
+            <div class="toxicity-bar-wrap">
+              <div class="toxicity-bar-label">
+                <span>Уровень токсичности</span>
+                <span class="mono toxicity-value--green">MEDIUM</span>
+              </div>
+              <div class="toxicity-bar">
+                <div class="toxicity-bar__fill toxicity-bar__fill--green" style="--w:42%"></div>
+              </div>
+            </div>
+            <div class="v-card__reason">
+              <span class="reason-tag reason-tag--green">Запрещённый контент</span>
+            </div>
+            <p class="v-card__desc">Публикация <strong>материалов, нарушающих правила</strong> ресурса. Нарушитель признал вину, санкция применена, вопрос закрыт администрацией.</p>
+            <div class="v-card__contacts">
+              <a class="contact-tag contact-tag--telegram" href="#" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="currentColor" width="12" height="12"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+                @ghost_user99
+              </a>
+            </div>
+            <div class="v-card__report-row">
+              <span class="reports-count">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/></svg>
+                <strong>9</strong> жалоб
+              </span>
+              <div class="v-card__actions">
+                <button class="card-btn card-btn--ghost" onclick="openDetail(this)">Подробнее</button>
+                <button class="card-btn card-btn--danger" onclick="reportUser(this)">Пожаловаться</button>
+              </div>
+            </div>
+          </div>
+        </article>
+
+      </div><!-- /cards-grid -->
+    </div><!-- /cards-column -->
+
+
+    <!-- ── RIGHT: SIDEBAR ──────────────────────────────────────── -->
+    <aside class="sidebar">
+
+      <!-- LIVE FEED -->
+      <div class="sidebar-card">
+        <div class="sidebar-card__header">
+          <span class="pulse-dot pulse-dot--red"></span>
+          <span class="sidebar-card__title">LIVE ЖАЛОБЫ</span>
+          <span class="live-badge mono">LIVE</span>
+        </div>
+        <div class="feed" id="liveFeed">
+          <div class="feed-item">
+            <span class="feed-item__time mono">02:14</span>
+            <span class="feed-item__user feed-item__user--red">D3STROYER_X</span>
+            <span class="feed-item__action">получил жалобу</span>
+          </div>
+          <div class="feed-item">
+            <span class="feed-item__time mono">01:58</span>
+            <span class="feed-item__user feed-item__user--orange">XAOS_MAKER</span>
+            <span class="feed-item__action">предупреждение</span>
+          </div>
+          <div class="feed-item">
+            <span class="feed-item__time mono">01:33</span>
+            <span class="feed-item__user feed-item__user--purple">NULL_TOXIN</span>
+            <span class="feed-item__action">добавлен в реестр</span>
+          </div>
+          <div class="feed-item">
+            <span class="feed-item__time mono">00:47</span>
+            <span class="feed-item__user feed-item__user--red">D3STROYER_X</span>
+            <span class="feed-item__action">новое нарушение</span>
+          </div>
+          <div class="feed-item">
+            <span class="feed-item__time mono">00:12</span>
+            <span class="feed-item__user feed-item__user--green">ghost_user99</span>
+            <span class="feed-item__action">дело закрыто</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- TOP VIOLATORS -->
+      <div class="sidebar-card" id="topViolators">
+        <div class="sidebar-card__header">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+          <span class="sidebar-card__title">ТОП НАРУШИТЕЛЕЙ</span>
+        </div>
+        <div class="top-list">
+          <div class="top-item">
+            <span class="top-rank top-rank--1 mono">#1</span>
+            <div class="avatar avatar--red avatar--sm">D</div>
+            <div class="top-info">
+              <div class="top-nick">D3STROYER_X</div>
+              <div class="top-meta mono">94% · 47 жалоб</div>
+            </div>
+            <div class="top-bar-mini">
+              <div class="top-bar-fill" style="--w:94%;--c:#ff3b5c"></div>
+            </div>
+          </div>
+          <div class="top-item">
+            <span class="top-rank top-rank--2 mono">#2</span>
+            <div class="avatar avatar--purple avatar--sm">N</div>
+            <div class="top-info">
+              <div class="top-nick">NULL_TOXIN</div>
+              <div class="top-meta mono">88% · 35 жалоб</div>
+            </div>
+            <div class="top-bar-mini">
+              <div class="top-bar-fill" style="--w:88%;--c:#a855f7"></div>
+            </div>
+          </div>
+          <div class="top-item">
+            <span class="top-rank top-rank--3 mono">#3</span>
+            <div class="avatar avatar--orange avatar--sm">X</div>
+            <div class="top-info">
+              <div class="top-nick">XAOS_MAKER</div>
+              <div class="top-meta mono">71% · 23 жалобы</div>
+            </div>
+            <div class="top-bar-mini">
+              <div class="top-bar-fill" style="--w:71%;--c:#f97316"></div>
+            </div>
+          </div>
+          <div class="top-item">
+            <span class="top-rank mono">#4</span>
+            <div class="avatar avatar--green avatar--sm">G</div>
+            <div class="top-info">
+              <div class="top-nick">ghost_user99</div>
+              <div class="top-meta mono">42% · 9 жалоб</div>
+            </div>
+            <div class="top-bar-mini">
+              <div class="top-bar-fill" style="--w:42%;--c:#22c55e"></div>
             </div>
           </div>
         </div>
       </div>
-    </article>
 
-
-    <!-- ══ Карточка 2 — warning ═════════════════ -->
-    <article class="v-card" data-status="warning">
-      <div class="v-card__shot" onclick="openLightbox('screenshots/placeholder-3.svg','Провокация — nick_three')">
-        <img src="screenshots/placeholder-3.svg" alt="Скриншот нарушения" loading="lazy">
-        <div class="v-card__shot-overlay">
-          <span class="v-card__shot-label">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="11" height="11"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
-            Доказательство
-          </span>
-          <span class="v-card__zoom-hint">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="11" height="11"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35M11 8v6M8 11h6"/></svg>
-            Увеличить
-          </span>
+      <!-- MODERATION PANEL -->
+      <div class="sidebar-card sidebar-card--mod">
+        <div class="sidebar-card__header">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <span class="sidebar-card__title">ПАНЕЛЬ МОДЕРАЦИИ</span>
+          <span class="mod-badge">MOD</span>
+        </div>
+        <div class="mod-panel">
+          <div class="mod-stat">
+            <span class="mod-stat__label">Ожидают рассмотрения</span>
+            <span class="mod-stat__val mono mod-stat__val--red">7</span>
+          </div>
+          <div class="mod-stat">
+            <span class="mod-stat__label">В процессе</span>
+            <span class="mod-stat__val mono mod-stat__val--orange">3</span>
+          </div>
+          <div class="mod-stat">
+            <span class="mod-stat__label">Закрыто сегодня</span>
+            <span class="mod-stat__val mono mod-stat__val--green">2</span>
+          </div>
+          <button class="mod-action-btn" id="btnModPanel">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+            Открыть панель
+          </button>
         </div>
       </div>
-      <div class="v-card__body">
-        <div class="v-card__header-row">
-          <span class="badge badge--warning">⚠ Предупреждение</span>
-          <span class="v-card__date">10 мая 2026</span>
+
+      <!-- CHAT -->
+      <div class="sidebar-card sidebar-card--chat">
+        <div class="sidebar-card__header">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          <span class="sidebar-card__title">ЧАТ СООБЩЕСТВА</span>
+          <span class="online-dot" style="margin-left:auto"></span>
         </div>
-        <div class="v-card__offender">
-          <div class="v-card__section-label">Нарушитель</div>
-          <div class="v-card__user">
-            <div class="v-card__avatar" style="--av-color:#d97706">N</div>
-            <div class="v-card__user-info">
-              <div class="v-card__nick">nick_three</div>
-              <div class="v-card__uid">ID #00389</div>
-            </div>
+        <div class="chat-messages" id="chatMessages">
+          <div class="chat-msg">
+            <span class="chat-msg__nick" style="color:#ff3b5c">Kr1pT0n</span>
+            <span class="chat-msg__text">D3STROYER уже 3-й аккаунт создаёт 💀</span>
           </div>
-          <span class="contact-label">Написать нарушителю:</span>
-          <div class="v-card__tags">
-            <a class="tag tag--discord" href="https://discord.com/users/000000000000000003" target="_blank" rel="noopener">
-              <svg viewBox="0 0 24 24" fill="currentColor" width="12" height="12"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg>
-              nick_three#2244
-            </a>
+          <div class="chat-msg">
+            <span class="chat-msg__nick" style="color:#a855f7">void_walker</span>
+            <span class="chat-msg__text">NULL_TOXIN продавал стилеры, блокируйте</span>
+          </div>
+          <div class="chat-msg">
+            <span class="chat-msg__nick" style="color:#4f8fff">cyber_mod</span>
+            <span class="chat-msg__text">Жалобы рассматриваются в течение 24ч</span>
+          </div>
+          <div class="chat-msg">
+            <span class="chat-msg__nick" style="color:#f97316">xXxGhost</span>
+            <span class="chat-msg__text">когда добавят XAOS? он снова троллит</span>
+          </div>
+          <div class="chat-msg">
+            <span class="chat-msg__nick" style="color:#22c55e">echo_null</span>
+            <span class="chat-msg__text">реестр работает, уже двоих убрали 👍</span>
           </div>
         </div>
-        <div class="v-card__violation">
-          <div class="v-card__section-label">Нарушение</div>
-          <p class="v-card__desc"><strong>п.&nbsp;2.4 — провокация и систематический оффтоп.</strong> Повторное нарушение в течение 7 дней: намеренное уклонение от темы обсуждения и провоцирование конфликтов между участниками.</p>
-        </div>
-        <div class="v-card__people-row">
-          <div class="v-card__person v-card__person--reporter">
-            <div class="v-card__section-label">Выставил на доску</div>
-            <div class="v-card__user v-card__user--sm">
-              <div class="v-card__avatar v-card__avatar--sm" style="--av-color:#1e7840">A</div>
-              <div class="v-card__user-info">
-                <div class="v-card__nick v-card__nick--sm">admin_root</div>
-                <div class="v-card__role-badge v-card__role-badge--admin">Администратор</div>
-              </div>
-            </div>
-          </div>
-          <div class="v-card__person v-card__person--violator">
-            <div class="v-card__section-label">Нарушитель</div>
-            <div class="v-card__user v-card__user--sm">
-              <div class="v-card__avatar v-card__avatar--sm" style="--av-color:#d97706">N</div>
-              <div class="v-card__user-info">
-                <div class="v-card__nick v-card__nick--sm">nick_three</div>
-                <div class="v-card__role-badge v-card__role-badge--violator">Нарушитель</div>
-              </div>
-            </div>
-          </div>
+        <div class="chat-input-row">
+          <input class="chat-input" type="text" placeholder="Написать в чат..." id="chatInput" maxlength="120">
+          <button class="chat-send-btn" id="chatSend">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          </button>
         </div>
       </div>
-    </article>
 
+    </aside><!-- /sidebar -->
+  </div><!-- /content-layout -->
 
-    <!-- ══ Карточка 3 — resolved ════════════════ -->
-    <article class="v-card" data-status="resolved">
-      <div class="v-card__shot" onclick="openLightbox('screenshots/placeholder-2.svg','Запрещённый контент — user_two')">
-        <img src="screenshots/placeholder-2.svg" alt="Скриншот нарушения" loading="lazy">
-        <div class="v-card__shot-overlay">
-          <span class="v-card__shot-label">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="11" height="11"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
-            Доказательство
-          </span>
-          <span class="v-card__zoom-hint">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="11" height="11"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35M11 8v6M8 11h6"/></svg>
-            Увеличить
-          </span>
-        </div>
-      </div>
-      <div class="v-card__body">
-        <div class="v-card__header-row">
-          <span class="badge badge--resolved">✓ Закрыто</span>
-          <span class="v-card__date">28 марта 2026</span>
-        </div>
-        <div class="v-card__offender">
-          <div class="v-card__section-label">Нарушитель</div>
-          <div class="v-card__user">
-            <div class="v-card__avatar" style="--av-color:#888">U</div>
-            <div class="v-card__user-info">
-              <div class="v-card__nick">user_two</div>
-              <div class="v-card__uid">ID #00201</div>
-            </div>
-          </div>
-          <span class="contact-label">Написать нарушителю:</span>
-          <div class="v-card__tags">
-            <a class="tag tag--telegram" href="https://t.me/usertwo" target="_blank" rel="noopener">
-              <svg viewBox="0 0 24 24" fill="currentColor" width="12" height="12"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
-              @usertwo
-            </a>
-          </div>
-        </div>
-        <div class="v-card__violation">
-          <div class="v-card__section-label">Нарушение</div>
-          <p class="v-card__desc"><strong>п.&nbsp;5.2 — публикация запрещённого контента.</strong> Участник разместил материалы, нарушающие правила ресурса. Нарушение признано, санкция применена, вопрос закрыт.</p>
-        </div>
-        <div class="v-card__people-row">
-          <div class="v-card__person v-card__person--reporter">
-            <div class="v-card__section-label">Выставил на доску</div>
-            <div class="v-card__user v-card__user--sm">
-              <div class="v-card__avatar v-card__avatar--sm" style="--av-color:#1055b0">M</div>
-              <div class="v-card__user-info">
-                <div class="v-card__nick v-card__nick--sm">moderator_one</div>
-                <div class="v-card__role-badge v-card__role-badge--mod">Модератор</div>
-              </div>
-            </div>
-          </div>
-          <div class="v-card__person v-card__person--violator">
-            <div class="v-card__section-label">Нарушитель</div>
-            <div class="v-card__user v-card__user--sm">
-              <div class="v-card__avatar v-card__avatar--sm" style="--av-color:#888">U</div>
-              <div class="v-card__user-info">
-                <div class="v-card__nick v-card__nick--sm">user_two</div>
-                <div class="v-card__role-badge v-card__role-badge--violator">Нарушитель</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </article>
-
-  </div><!-- /cards-grid -->
-</div><!-- /page-wrap -->
 </main>
 
+<!-- ══ FOOTER ════════════════════════════════════════════════ -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <span class="mono">© <span id="year">2026</span> шаблоны — <span style="color:var(--red-glow)">ДОСКА ПОЗОРА</span></span>
+    <div class="footer-links">
+      <a href="index.html">Главная</a>
+      <a href="templates.html">Шаблоны</a>
+      <a href="typing.html">Печать</a>
+    </div>
+  </div>
+</footer>
 
-<!-- ══ FOOTER ════════════════════════════════════════════════════ -->
-<div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+<!-- ══ LIGHTBOX ══════════════════════════════════════════════ -->
+<div class="lightbox" id="lightbox" onclick="if(event.target===this)closeLightbox()">
   <div class="lightbox__inner">
     <div class="lightbox__topbar">
-      <span id="lightbox-title" class="lightbox__title"></span>
-      <button class="lightbox__close" onclick="closeLightbox()" aria-label="Закрыть">✕</button>
+      <span class="lightbox__title mono" id="lbTitle"></span>
+      <button class="lightbox__close" onclick="closeLightbox()">✕</button>
     </div>
-    <img class="lightbox__img" id="lightbox-img" src="" alt="Скриншот нарушения">
+    <img class="lightbox__img" id="lbImg" src="" alt="">
   </div>
 </div>
 
-<!-- ══ FOOTER ════════════════════════════════════════════════════ -->
-<footer class="site-footer">
-  <span>© <span id="year">2026</span> шаблоны. Все права затроленны.</span>
-  &nbsp;·&nbsp;
-  <a href="index.html">Главная</a>
-  &nbsp;·&nbsp;
-  <a href="#">Правила</a>
-</footer>
+<!-- ══ REPORT MODAL ══════════════════════════════════════════ -->
+<div class="modal" id="reportModal" onclick="if(event.target===this)closeModal('reportModal')">
+  <div class="modal__inner">
+    <div class="modal__header">
+      <h2 class="modal__title">ПОДАТЬ ЖАЛОБУ</h2>
+      <button class="modal__close" onclick="closeModal('reportModal')">✕</button>
+    </div>
+    <div class="modal__body">
+      <div class="form-group">
+        <label class="form-label">Никнейм нарушителя</label>
+        <input class="form-input" type="text" placeholder="username#0000" id="reportNick">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Тип нарушения</label>
+        <select class="form-input" id="reportType">
+          <option>Спам / флуд</option>
+          <option>Угрозы / токсичность</option>
+          <option>Мошенничество / скам</option>
+          <option>Читы / нечестная игра</option>
+          <option>Запрещённый контент</option>
+          <option>Другое</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Описание</label>
+        <textarea class="form-input form-textarea" placeholder="Опишите нарушение подробно..." id="reportDesc"></textarea>
+      </div>
+      <div class="modal__actions">
+        <button class="btn btn--ghost" onclick="closeModal('reportModal')">Отмена</button>
+        <button class="btn btn--danger" onclick="submitReport()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          Отправить жалобу
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
 
-<!-- ══ КАСТОМНЫЙ КУРСОР ══════════════════════════════════════════ -->
+<!-- ══ MOD PANEL MODAL ═══════════════════════════════════════ -->
+<div class="modal" id="modModal" onclick="if(event.target===this)closeModal('modModal')">
+  <div class="modal__inner modal__inner--wide">
+    <div class="modal__header">
+      <h2 class="modal__title">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        ПАНЕЛЬ МОДЕРАЦИИ
+      </h2>
+      <button class="modal__close" onclick="closeModal('modModal')">✕</button>
+    </div>
+    <div class="modal__body">
+      <div class="mod-table-wrap">
+        <table class="mod-table">
+          <thead>
+            <tr>
+              <th class="mono">РАНГ</th>
+              <th>НАРУШИТЕЛЬ</th>
+              <th class="mono">ТОКС.</th>
+              <th>СТАТУС</th>
+              <th class="mono">ЖАЛОБЫ</th>
+              <th>ДЕЙСТВИЯ</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="mono top-rank--1">#1</td>
+              <td><div class="table-user"><div class="avatar avatar--red avatar--sm">D</div><span>D3STROYER_X</span></div></td>
+              <td><span class="mono toxicity-value--red">94%</span></td>
+              <td><span class="status-badge status-badge--active">● АКТИВНО</span></td>
+              <td class="mono">47</td>
+              <td><div class="table-actions"><button class="card-btn card-btn--ghost" style="font-size:0.7rem;padding:4px 10px">Просмотр</button><button class="card-btn card-btn--danger" style="font-size:0.7rem;padding:4px 10px">Блок</button></div></td>
+            </tr>
+            <tr>
+              <td class="mono top-rank--2">#2</td>
+              <td><div class="table-user"><div class="avatar avatar--purple avatar--sm">N</div><span>NULL_TOXIN</span></div></td>
+              <td><span class="mono toxicity-value--red">88%</span></td>
+              <td><span class="status-badge status-badge--active">● АКТИВНО</span></td>
+              <td class="mono">35</td>
+              <td><div class="table-actions"><button class="card-btn card-btn--ghost" style="font-size:0.7rem;padding:4px 10px">Просмотр</button><button class="card-btn card-btn--danger" style="font-size:0.7rem;padding:4px 10px">Блок</button></div></td>
+            </tr>
+            <tr>
+              <td class="mono top-rank--3">#3</td>
+              <td><div class="table-user"><div class="avatar avatar--orange avatar--sm">X</div><span>XAOS_MAKER</span></div></td>
+              <td><span class="mono toxicity-value--orange">71%</span></td>
+              <td><span class="status-badge status-badge--warning">⚠ ПРЕДУПР.</span></td>
+              <td class="mono">23</td>
+              <td><div class="table-actions"><button class="card-btn card-btn--ghost" style="font-size:0.7rem;padding:4px 10px">Просмотр</button><button class="card-btn card-btn--danger" style="font-size:0.7rem;padding:4px 10px">Блок</button></div></td>
+            </tr>
+            <tr>
+              <td class="mono">#4</td>
+              <td><div class="table-user"><div class="avatar avatar--green avatar--sm">G</div><span>ghost_user99</span></div></td>
+              <td><span class="mono toxicity-value--green">42%</span></td>
+              <td><span class="status-badge status-badge--resolved">✓ ЗАКРЫТО</span></td>
+              <td class="mono">9</td>
+              <td><div class="table-actions"><button class="card-btn card-btn--ghost" style="font-size:0.7rem;padding:4px 10px">Просмотр</button></div></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ TOAST ══════════════════════════════════════════════════ -->
+<div class="toast" id="toast"></div>
+
+<!-- ══ CUSTOM CURSOR ══════════════════════════════════════════ -->
 <div id="custom-cursor">
   <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
     <path class="cursor-stroke" d="M5.5 3.21V20.8l4.86-4.86h8.14L5.5 3.21z" stroke-width="1.4" fill="none"/>
-    <path class="cursor-fill"   d="M5.5 3.21V20.8l4.86-4.86h8.14L5.5 3.21z"/>
+    <path class="cursor-fill" d="M5.5 3.21V20.8l4.86-4.86h8.14L5.5 3.21z"/>
   </svg>
 </div>
 <canvas id="cursor-trail-canvas"></canvas>
 
-<script>
-/* ── год в футере ── */
-document.getElementById('year').textContent = new Date().getFullYear();
-
-/* ── лайтбокс ── */
-function openLightbox(src, title) {
-  document.getElementById('lightbox-img').src = src;
-  document.getElementById('lightbox-title').textContent = title || 'Скриншот нарушения';
-  document.getElementById('lightbox').classList.add('open');
-  document.body.style.overflow = 'hidden';
-}
-function closeLightbox(e) {
-  if (e && e.target !== e.currentTarget && !e.target.closest('.lightbox__close')) return;
-  document.getElementById('lightbox').classList.remove('open');
-  document.body.style.overflow = '';
-}
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
-
-/* фильтры удалены */
-</script>
+<script src="shame.js"></script>
 </body>
 </html>
