@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru" data-theme="light">
+<html lang="ru" data-theme="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,59 +11,59 @@
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700;800&family=Golos+Text:wght@400;500;600&display=swap" rel="stylesheet">
 <script src="theme.js"></script>
 <style>
-
 :root {
   --bg: #f4f7fc; --bg2: #e8eef8; --card: #ffffff;
   --text: #0a0a0a; --text2: #4a5568;
   --accent: #5b9aff; --accent2: #4080e8; --accent-glow: rgba(91,154,255,0.12);
-  --border: rgba(0,0,0,0.07); --shadow: 0 1px 3px rgba(0,0,0,0.03), 0 6px 20px rgba(0,0,0,0.05);
+  --border: rgba(0,0,0,0.07); --shadow: 0 1px 3px rgba(0,0,0,0.03),0 6px 20px rgba(0,0,0,0.05);
   --radius: 16px; --tag-bg: rgba(91,154,255,0.08); --tag-text: #3b7de8;
   --red: #e35b5b; --red-bg: rgba(227,91,91,0.08); --red-border: rgba(227,91,91,0.2);
   --yellow: #d97706; --yellow-bg: rgba(217,119,6,0.08); --yellow-border: rgba(217,119,6,0.2);
   --green: #059669; --green-bg: rgba(5,150,105,0.08); --green-border: rgba(5,150,105,0.18);
 }
 [data-theme="dark"] {
-  --bg: #0a0e1a; --bg2: #0f1424; --card: #131a2e;
+  --bg: #080b14; --bg2: #0d1120; --card: #0f1629;
   --text: #e8ecf4; --text2: #7b8ba8;
   --accent: #4f8fff; --accent2: #3a7aef; --accent-glow: rgba(79,143,255,0.15);
-  --border: rgba(232,236,244,0.06); --shadow: 0 2px 8px rgba(0,0,0,0.3), 0 12px 40px rgba(0,0,0,0.4);
+  --border: rgba(232,236,244,0.07); --shadow: 0 2px 8px rgba(0,0,0,0.4),0 12px 40px rgba(0,0,0,0.5);
   --tag-bg: rgba(79,143,255,0.1); --tag-text: #6ba3ff;
-  --red: #e35b5b; --red-bg: rgba(227,91,91,0.1); --red-border: rgba(227,91,91,0.25);
-  --yellow: #f59e0b; --yellow-bg: rgba(245,158,11,0.1); --yellow-border: rgba(245,158,11,0.25);
-  --green: #34d399; --green-bg: rgba(52,211,153,0.1); --green-border: rgba(52,211,153,0.2);
+  --red: #ff5f5f; --red-bg: rgba(255,95,95,0.09); --red-border: rgba(255,95,95,0.22);
+  --yellow: #fbbf24; --yellow-bg: rgba(251,191,36,0.09); --yellow-border: rgba(251,191,36,0.22);
+  --green: #34d399; --green-bg: rgba(52,211,153,0.09); --green-border: rgba(52,211,153,0.2);
 }
 ::view-transition-old(root),::view-transition-new(root){animation:none;mix-blend-mode:normal}
 ::view-transition-old(root){z-index:1}::view-transition-new(root){z-index:999}
-[data-theme="dark"]::view-transition-old(root){z-index:999}
-[data-theme="dark"]::view-transition-new(root){z-index:1}
-*{box-sizing:border-box;margin:0;padding:0}
-html,body{height:100%}
+[data-theme="dark"]::view-transition-old(root){z-index:999}[data-theme="dark"]::view-transition-new(root){z-index:1}
+*{box-sizing:border-box;margin:0;padding:0}html,body{height:100%}
 body{font-family:'Golos Text',sans-serif;-webkit-font-smoothing:antialiased;background:var(--bg);color:var(--text);min-height:100vh;transition:background .35s,color .35s;overflow-x:hidden;position:relative}
-a{text-decoration:none;color:inherit}
-img{display:block;max-width:100%}
+a{text-decoration:none;color:inherit}img{display:block;max-width:100%}
+</style>
 
+<style>
 /* mesh bg */
 .mesh-bg{position:fixed;inset:0;z-index:1;overflow:hidden;pointer-events:none}
-.mesh-bg span{position:absolute;border-radius:50%;filter:blur(100px);will-change:transform;mix-blend-mode:screen}
+.mesh-bg span{position:absolute;border-radius:50%;filter:blur(110px);will-change:transform;mix-blend-mode:screen}
 .mesh-bg .orb1{width:70vw;height:70vw;top:-20vw;right:-15vw;animation:orbFloat1 24s ease-in-out infinite}
 .mesh-bg .orb2{width:60vw;height:60vw;bottom:-18vw;left:-12vw;animation:orbFloat2 30s ease-in-out infinite}
-.mesh-bg .orb3{width:40vw;height:40vw;top:35%;left:30%;animation:orbFloat3 20s ease-in-out infinite}
+.mesh-bg .orb3{width:45vw;height:45vw;top:40%;left:25%;animation:orbFloat3 20s ease-in-out infinite}
 [data-theme="light"] .mesh-bg .orb1{background:radial-gradient(circle,rgba(91,154,255,.06) 0%,transparent 70%)}
-[data-theme="light"] .mesh-bg .orb2{background:radial-gradient(circle,rgba(99,102,241,.04) 0%,transparent 70%)}
+[data-theme="light"] .mesh-bg .orb2{background:radial-gradient(circle,rgba(227,91,91,.04) 0%,transparent 70%)}
 [data-theme="light"] .mesh-bg .orb3{background:radial-gradient(circle,rgba(91,154,255,.03) 0%,transparent 65%)}
-[data-theme="dark"] .mesh-bg .orb1{background:radial-gradient(circle,rgba(79,143,255,.12) 0%,transparent 70%)}
-[data-theme="dark"] .mesh-bg .orb2{background:radial-gradient(circle,rgba(99,102,241,.08) 0%,transparent 70%)}
-[data-theme="dark"] .mesh-bg .orb3{background:radial-gradient(circle,rgba(79,143,255,.06) 0%,transparent 65%)}
+[data-theme="dark"] .mesh-bg .orb1{background:radial-gradient(circle,rgba(79,143,255,.09) 0%,transparent 70%)}
+[data-theme="dark"] .mesh-bg .orb2{background:radial-gradient(circle,rgba(255,95,95,.06) 0%,transparent 70%)}
+[data-theme="dark"] .mesh-bg .orb3{background:radial-gradient(circle,rgba(79,143,255,.04) 0%,transparent 65%)}
 @keyframes orbFloat1{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-4%,5%) scale(1.07)}}
 @keyframes orbFloat2{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(5%,-4%) scale(1.1)}}
 @keyframes orbFloat3{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(3%,3%) scale(1.04)}66%{transform:translate(-2%,-2%) scale(.96)}}
-.dot-grid{position:fixed;inset:0;z-index:1;pointer-events:none;background-image:radial-gradient(rgba(10,14,26,.04) 1px,transparent 1px);background-size:32px 32px}
-[data-theme="dark"] .dot-grid{background-image:radial-gradient(rgba(79,143,255,.04) 1px,transparent 1px)}
+.dot-grid{position:fixed;inset:0;z-index:1;pointer-events:none;background-image:radial-gradient(rgba(10,14,26,.05) 1px,transparent 1px);background-size:30px 30px}
+[data-theme="dark"] .dot-grid{background-image:radial-gradient(rgba(79,143,255,.035) 1px,transparent 1px)}
 header,main,footer{position:relative;z-index:10}
+</style>
 
-/* header */
-header{position:sticky;top:0;z-index:200;background:rgba(244,247,252,.75);border-bottom:1px solid var(--border);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);padding:0 28px;transition:background .4s,border-color .4s}
-[data-theme="dark"] header{background:rgba(10,14,26,.7)}
+<style>
+/* ── HEADER ── */
+header{position:sticky;top:0;z-index:200;background:rgba(244,247,252,.8);border-bottom:1px solid var(--border);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);padding:0 28px;transition:background .4s,border-color .4s}
+[data-theme="dark"] header{background:rgba(8,11,20,.75)}
 .header-inner{max-width:1240px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:66px;gap:16px}
 .logo{display:flex;align-items:center;gap:10px;font-family:'Unbounded',sans-serif;font-weight:700;font-size:1.1rem;color:var(--text);letter-spacing:-.5px;flex-shrink:0}
 .logo img{width:32px;height:32px;border-radius:9px;object-fit:cover}
@@ -71,43 +71,49 @@ header{position:sticky;top:0;z-index:200;background:rgba(244,247,252,.75);border
 nav.main-nav{display:flex;gap:2px;position:absolute;left:50%;transform:translateX(-50%)}
 nav.main-nav a{padding:7px 15px;border-radius:10px;color:var(--text2);font-size:.83rem;font-family:'Unbounded',sans-serif;font-weight:600;transition:all .2s;border:1px solid transparent;letter-spacing:.01em}
 nav.main-nav a:hover{color:var(--text);background:var(--bg2);border-color:var(--border)}
-nav.main-nav a.active{color:var(--accent);background:var(--tag-bg)}
+nav.main-nav a.active{color:var(--red);background:var(--red-bg);border-color:var(--red-border)}
 .header-actions{display:flex;align-items:center;gap:10px}
 .theme-btn{background:var(--bg2);border:1px solid var(--border);color:var(--text);cursor:pointer;border-radius:999px;width:38px;height:38px;display:inline-flex;align-items:center;justify-content:center;transition:background .25s,border-color .25s,transform .25s;overflow:hidden}
 .theme-btn:hover{background:var(--card);border-color:var(--accent);transform:translateY(-1px)}
-.theme-btn svg{transition:transform .5s cubic-bezier(.32,.72,0,1),opacity .3s}
+.theme-btn svg{transition:transform .5s cubic-bezier(.32,.72,0,1)}
 .theme-btn:hover svg{transform:rotate(25deg)}
 @media(max-width:720px){nav.main-nav{display:none}}
 
-/* page layout */
+/* ── PAGE LAYOUT ── */
 .page-wrap{max-width:1240px;margin:0 auto;padding:64px 36px 100px}
-/* hero */
+@media(max-width:600px){.page-wrap{padding:40px 20px 80px}}
+
+/* ── HERO ── */
 .sh-hero{margin-bottom:52px;animation:fadeUp .6s ease both}
 .sh-hero__tag{display:inline-flex;align-items:center;gap:8px;padding:6px 16px;margin-bottom:24px;background:var(--red-bg);color:var(--red);border-radius:999px;font-size:.76rem;font-family:'Unbounded',sans-serif;font-weight:700;letter-spacing:.04em;border:1px solid var(--red-border)}
 .pulse-dot{width:7px;height:7px;border-radius:50%;background:var(--red);animation:pulseRed 2.2s infinite}
-@keyframes pulseRed{0%{box-shadow:0 0 0 0 rgba(227,91,91,.4)}70%{box-shadow:0 0 0 9px transparent}100%{box-shadow:0 0 0 0 transparent}}
-.sh-hero__title{font-family:'Unbounded',sans-serif;font-size:clamp(2rem,5vw,3.8rem);font-weight:700;line-height:1.05;letter-spacing:-.03em;margin-bottom:16px;color:var(--text);text-wrap:balance}
-.sh-hero__title .accent{color:var(--accent);font-style:italic;font-weight:600;position:relative}
-.sh-hero__title .accent::after{content:'';position:absolute;left:0;right:0;bottom:.06em;height:.07em;background:var(--accent);opacity:.2;border-radius:2px}
-.sh-hero__sub{color:var(--text2);font-size:clamp(.95rem,1.4vw,1.05rem);line-height:1.7;max-width:580px;margin-bottom:24px}
-/* notice */
-.notice-box{display:flex;gap:12px;align-items:flex-start;background:var(--tag-bg);border:1px solid var(--border);border-radius:14px;padding:16px 20px;font-size:.88rem;color:var(--text2);max-width:660px;line-height:1.7}
+@keyframes pulseRed{0%{box-shadow:0 0 0 0 rgba(255,95,95,.4)}70%{box-shadow:0 0 0 9px transparent}100%{box-shadow:0 0 0 0 transparent}}
+.sh-hero__title{font-family:'Unbounded',sans-serif;font-size:clamp(2.2rem,5vw,3.8rem);font-weight:800;line-height:1.05;letter-spacing:-.035em;margin-bottom:16px;color:var(--text);text-wrap:balance}
+.sh-hero__title .accent-red{color:var(--red);font-style:italic;font-weight:700;position:relative}
+.sh-hero__title .accent-red::after{content:'';position:absolute;left:0;right:0;bottom:.06em;height:.07em;background:var(--red);opacity:.18;border-radius:2px}
+.sh-hero__sub{color:var(--text2);font-size:clamp(.9rem,1.4vw,1.05rem);line-height:1.72;max-width:580px;margin-bottom:24px}
+.notice-box{display:flex;gap:12px;align-items:flex-start;background:var(--tag-bg);border:1px solid var(--border);border-radius:14px;padding:16px 20px;font-size:.87rem;color:var(--text2);max-width:660px;line-height:1.7}
 .notice-box__icon{flex-shrink:0;color:var(--accent);margin-top:2px}
 .notice-box strong{color:var(--text);font-weight:600}
 .notice-box a{color:var(--accent);text-decoration:underline;text-underline-offset:3px}
 .notice-box a:hover{opacity:.8}
+</style>
 
-/* stats */
-.stats-strip{display:flex;gap:12px;margin-bottom:32px;flex-wrap:wrap;animation:fadeUp .6s .1s ease both}
-.stat-chip{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px 22px;box-shadow:var(--shadow);transition:transform .2s}
-.stat-chip:hover{transform:translateY(-2px)}
-.stat-chip strong{display:block;font-family:'Unbounded',sans-serif;font-size:1.5rem;font-weight:800;color:var(--text);line-height:1;margin-bottom:4px}
-.stat-chip span{font-size:.78rem;color:var(--text2);font-weight:500}
-.stat-chip--red strong{color:var(--red)}
-.stat-chip--yellow strong{color:var(--yellow)}
-.stat-chip--green strong{color:var(--green)}
-/* filters */
-.filters{display:flex;gap:8px;margin-bottom:32px;flex-wrap:wrap;animation:fadeUp .6s .15s ease both}
+<style>
+/* ── STATS ── */
+.stats-strip{display:flex;gap:12px;margin-bottom:36px;flex-wrap:wrap;animation:fadeUp .6s .1s ease both}
+.stat-chip{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:18px 24px;box-shadow:var(--shadow);transition:transform .2s,box-shadow .2s;position:relative;overflow:hidden}
+.stat-chip:hover{transform:translateY(-3px);box-shadow:0 12px 32px rgba(0,0,0,.18)}
+.stat-chip::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;border-radius:16px 16px 0 0;background:var(--chip-accent,var(--accent));opacity:.6}
+.stat-chip strong{display:block;font-family:'Unbounded',sans-serif;font-size:1.7rem;font-weight:800;line-height:1;margin-bottom:5px;color:var(--chip-color,var(--text))}
+.stat-chip span{font-size:.77rem;color:var(--text2);font-weight:500;font-family:'Unbounded',sans-serif;letter-spacing:.03em;text-transform:uppercase}
+.stat-chip--all{--chip-accent:var(--accent);--chip-color:var(--text)}
+.stat-chip--red{--chip-accent:var(--red);--chip-color:var(--red)}
+.stat-chip--yellow{--chip-accent:var(--yellow);--chip-color:var(--yellow)}
+.stat-chip--green{--chip-accent:var(--green);--chip-color:var(--green)}
+
+/* ── FILTERS ── */
+.filters{display:flex;gap:8px;margin-bottom:36px;flex-wrap:wrap;animation:fadeUp .6s .15s ease both}
 .filter-btn{display:inline-flex;align-items:center;gap:7px;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:8px 16px;font-size:.82rem;font-family:'Unbounded',sans-serif;font-weight:600;color:var(--text2);cursor:pointer;transition:all .2s;letter-spacing:.01em}
 .filter-btn:hover{border-color:var(--text);color:var(--text);transform:translateY(-1px)}
 .filter-btn.active{background:var(--text);border-color:var(--text);color:var(--bg)}
@@ -117,102 +123,121 @@ nav.main-nav a.active{color:var(--accent);background:var(--tag-bg)}
 .filter-dot--warning{background:var(--yellow)}
 .filter-dot--resolved{background:var(--green)}
 
-/* cards grid */
-.cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(350px,1fr));gap:20px;animation:fadeUp .6s .2s ease both}
-/* card */
-.v-card{background:var(--card);border:1px solid var(--border);border-radius:20px;overflow:hidden;transition:all .28s cubic-bezier(.25,.8,.25,1);box-shadow:var(--shadow);position:relative}
-.v-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;transform:scaleX(0);transform-origin:left;transition:transform .4s cubic-bezier(.32,.72,0,1);border-radius:20px 20px 0 0}
-.v-card[data-status="active"]::before{background:var(--red)}
-.v-card[data-status="warning"]::before{background:var(--yellow)}
-.v-card[data-status="resolved"]::before{background:var(--green)}
-.v-card:hover{transform:translateY(-6px);border-color:rgba(0,0,0,.13);box-shadow:0 1px 2px rgba(0,0,0,.05),0 18px 40px rgba(0,0,0,.1)}
-[data-theme="dark"] .v-card:hover{border-color:rgba(232,236,244,.12);box-shadow:0 18px 40px rgba(0,0,0,.45)}
+/* ── CARDS GRID ── */
+.cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:22px;animation:fadeUp .6s .2s ease both}
+@media(max-width:600px){.cards-grid{grid-template-columns:1fr}}
+</style>
+
+<style>
+/* ── VIOLATION CARD ── */
+.v-card{background:var(--card);border:1px solid var(--border);border-radius:22px;overflow:hidden;transition:all .3s cubic-bezier(.25,.8,.25,1);box-shadow:var(--shadow);position:relative}
+.v-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;transform:scaleX(0);transform-origin:left;transition:transform .4s cubic-bezier(.32,.72,0,1);border-radius:22px 22px 0 0}
+.v-card[data-status="active"]::before{background:linear-gradient(90deg,var(--red),rgba(255,95,95,.4))}
+.v-card[data-status="warning"]::before{background:linear-gradient(90deg,var(--yellow),rgba(251,191,36,.4))}
+.v-card[data-status="resolved"]::before{background:linear-gradient(90deg,var(--green),rgba(52,211,153,.4))}
+.v-card:hover{transform:translateY(-6px);border-color:rgba(232,236,244,.15)}
+[data-theme="dark"] .v-card:hover{box-shadow:0 24px 50px rgba(0,0,0,.55)}
+[data-theme="light"] .v-card:hover{box-shadow:0 18px 40px rgba(0,0,0,.1);border-color:rgba(0,0,0,.13)}
 .v-card:hover::before{transform:scaleX(1)}
+
 /* screenshot */
 .v-card__shot{position:relative;background:var(--bg2);cursor:pointer;overflow:hidden}
-.v-card__shot img{width:100%;height:200px;object-fit:cover;transition:transform .35s}
-.v-card:hover .v-card__shot img{transform:scale(1.04)}
-.v-card__shot-overlay{position:absolute;inset:0;display:flex;align-items:flex-end;justify-content:space-between;padding:10px 12px;background:linear-gradient(to top,rgba(0,0,0,.5) 0%,transparent 55%)}
-.v-card__shot-label,.v-card__zoom-hint{display:inline-flex;align-items:center;gap:5px;background:rgba(0,0,0,.6);color:rgba(255,255,255,.9);font-size:.7rem;padding:4px 9px;border-radius:6px;backdrop-filter:blur(4px);font-family:'Unbounded',sans-serif;font-weight:600;letter-spacing:.02em}
+.v-card__shot img{width:100%;height:210px;object-fit:cover;transition:transform .4s cubic-bezier(.25,.8,.25,1)}
+.v-card:hover .v-card__shot img{transform:scale(1.05)}
+.v-card__shot-overlay{position:absolute;inset:0;display:flex;align-items:flex-end;justify-content:space-between;padding:10px 12px;background:linear-gradient(to top,rgba(0,0,0,.65) 0%,transparent 55%);pointer-events:none}
+.v-card__shot-label,.v-card__zoom-hint{display:inline-flex;align-items:center;gap:5px;background:rgba(0,0,0,.65);color:rgba(255,255,255,.92);font-size:.68rem;padding:4px 9px;border-radius:7px;backdrop-filter:blur(6px);font-family:'Unbounded',sans-serif;font-weight:600;letter-spacing:.03em;pointer-events:auto}
 .v-card__zoom-hint{opacity:0;transition:opacity .2s}
 .v-card:hover .v-card__zoom-hint{opacity:1}
 
 /* card body */
 .v-card__body{padding:20px}
-.v-card__header-row{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:16px;flex-wrap:wrap}
-.v-card__date{display:inline-flex;align-items:center;gap:5px;font-size:.8rem;color:var(--text2)}
+.v-card__header-row{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:18px;flex-wrap:wrap}
+.v-card__date{display:inline-flex;align-items:center;gap:5px;font-size:.78rem;color:var(--text2);font-family:'Unbounded',sans-serif;letter-spacing:.01em}
+
 /* section label */
-.v-card__section-label{font-size:.7rem;font-family:'Unbounded',sans-serif;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text2);margin-bottom:8px;opacity:.7}
+.v-card__section-label{font-size:.67rem;font-family:'Unbounded',sans-serif;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text2);margin-bottom:9px;opacity:.65}
+
 /* offender block */
-.v-card__offender{background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:14px;margin-bottom:14px}
-[data-theme="dark"] .v-card__offender{background:rgba(255,255,255,.03)}
+.v-card__offender{background:var(--bg);border:1px solid var(--border);border-radius:14px;padding:14px;margin-bottom:15px}
+[data-theme="dark"] .v-card__offender{background:rgba(255,255,255,.025)}
 .v-card__user{display:flex;align-items:center;gap:10px;margin-bottom:12px}
 .v-card__user--sm{margin-bottom:0}
-.v-card__avatar{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Unbounded',sans-serif;font-size:.9rem;font-weight:800;flex-shrink:0;text-transform:uppercase;background:color-mix(in srgb,var(--av-color,var(--accent)) 12%,var(--bg2));border:1.5px solid color-mix(in srgb,var(--av-color,var(--accent)) 25%,var(--border));color:var(--av-color,var(--accent))}
-.v-card__avatar--sm{width:28px;height:28px;font-size:.72rem}
+.v-card__avatar{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Unbounded',sans-serif;font-size:.92rem;font-weight:800;flex-shrink:0;text-transform:uppercase;background:color-mix(in srgb,var(--av-color,var(--accent)) 12%,var(--bg2));border:2px solid color-mix(in srgb,var(--av-color,var(--accent)) 28%,var(--border));color:var(--av-color,var(--accent))}
+.v-card__avatar--sm{width:28px;height:28px;font-size:.7rem;border-width:1.5px}
 .v-card__user-info{flex:1;min-width:0}
-.v-card__nick{font-weight:600;font-size:.95rem;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-family:'Unbounded',sans-serif;letter-spacing:-.01em}
+.v-card__nick{font-weight:700;font-size:.97rem;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-family:'Unbounded',sans-serif;letter-spacing:-.01em}
 .v-card__nick--sm{font-size:.82rem}
-.v-card__uid{font-size:.75rem;color:var(--text2);margin-top:1px}
-/* contact */
-.contact-label{display:block;font-size:.72rem;color:var(--text2);margin-bottom:7px;font-weight:500}
-.v-card__tags{display:flex;flex-wrap:wrap;gap:6px}
-.tag{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:8px;font-size:.78rem;font-weight:600;transition:filter .15s,transform .15s;white-space:nowrap;font-family:'Unbounded',sans-serif;letter-spacing:.01em}
-.tag:hover{filter:brightness(1.12);transform:translateY(-1px)}
-.tag svg{width:12px;height:12px;flex-shrink:0}
-.tag--discord{background:rgba(88,101,242,.1);border:1px solid rgba(88,101,242,.25);color:#6b7ef7}
-.tag--telegram{background:rgba(0,136,204,.1);border:1px solid rgba(0,136,204,.22);color:#29a8e0}
+.v-card__uid{font-size:.73rem;color:var(--text2);margin-top:2px}
 
-/* violation desc */
+/* contact */
+.contact-label{display:block;font-size:.7rem;color:var(--text2);margin-bottom:7px;font-weight:500}
+.v-card__tags{display:flex;flex-wrap:wrap;gap:6px}
+.tag{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:9px;font-size:.77rem;font-weight:600;transition:filter .15s,transform .15s;white-space:nowrap;font-family:'Unbounded',sans-serif;letter-spacing:.01em}
+.tag:hover{filter:brightness(1.15);transform:translateY(-1px)}
+.tag svg{width:12px;height:12px;flex-shrink:0}
+.tag--discord{background:rgba(88,101,242,.12);border:1px solid rgba(88,101,242,.28);color:#7b8fff}
+.tag--telegram{background:rgba(0,136,204,.1);border:1px solid rgba(0,136,204,.24);color:#33b5e8}
+
+/* violation description */
 .v-card__violation{margin-bottom:16px}
-.v-card__desc{font-size:.88rem;color:var(--text2);line-height:1.65}
+.v-card__desc{font-size:.87rem;color:var(--text2);line-height:1.68}
 .v-card__desc strong{color:var(--text);font-weight:600}
-/* people row */
-.v-card__people-row{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--border);border-radius:12px;overflow:hidden}
+
+/* people row — reporter + violator */
+.v-card__people-row{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--border);border-radius:14px;overflow:hidden}
+@media(max-width:600px){.v-card__people-row{grid-template-columns:1fr}}
 .v-card__person{padding:12px 14px}
-.v-card__person--reporter{background:rgba(79,143,255,.04);border-right:1px solid var(--border)}
-.v-card__person--violator{background:rgba(227,91,91,.04)}
-[data-theme="dark"] .v-card__person--reporter{background:rgba(79,143,255,.06)}
-[data-theme="dark"] .v-card__person--violator{background:rgba(227,91,91,.06)}
-.v-card__role-badge{display:inline-block;font-size:.65rem;font-family:'Unbounded',sans-serif;font-weight:700;padding:2px 8px;border-radius:999px;margin-top:3px;letter-spacing:.03em}
+.v-card__person--reporter{background:rgba(79,143,255,.045);border-right:1px solid var(--border)}
+.v-card__person--violator{background:rgba(255,95,95,.045)}
+[data-theme="light"] .v-card__person--reporter{background:rgba(79,143,255,.04)}
+[data-theme="light"] .v-card__person--violator{background:rgba(227,91,91,.04)}
+@media(max-width:600px){.v-card__person--reporter{border-right:none;border-bottom:1px solid var(--border)}}
+.v-card__role-badge{display:inline-block;font-size:.63rem;font-family:'Unbounded',sans-serif;font-weight:700;padding:2px 8px;border-radius:999px;margin-top:3px;letter-spacing:.03em}
 .v-card__role-badge--admin{background:var(--green-bg);color:var(--green);border:1px solid var(--green-border)}
 .v-card__role-badge--mod{background:var(--tag-bg);color:var(--accent);border:1px solid rgba(79,143,255,.2)}
 .v-card__role-badge--violator{background:var(--red-bg);color:var(--red);border:1px solid var(--red-border)}
+
 /* badges */
-.badge{display:inline-flex;align-items:center;gap:5px;font-size:.7rem;font-family:'Unbounded',sans-serif;font-weight:700;padding:4px 12px;border-radius:999px;letter-spacing:.04em}
+.badge{display:inline-flex;align-items:center;gap:5px;font-size:.7rem;font-family:'Unbounded',sans-serif;font-weight:700;padding:4px 13px;border-radius:999px;letter-spacing:.04em}
 .badge--active{background:var(--red-bg);color:var(--red);border:1px solid var(--red-border)}
 .badge--warning{background:var(--yellow-bg);color:var(--yellow);border:1px solid var(--yellow-border)}
 .badge--resolved{background:var(--green-bg);color:var(--green);border:1px solid var(--green-border)}
-/* lightbox */
-.lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:999;align-items:center;justify-content:center;padding:24px;backdrop-filter:blur(8px)}
+</style>
+
+<style>
+/* ── LIGHTBOX ── */
+.lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,.9);z-index:999;align-items:center;justify-content:center;padding:24px;backdrop-filter:blur(10px)}
 .lightbox.open{display:flex}
-.lightbox__inner{display:flex;flex-direction:column;max-width:92vw;max-height:90vh;background:var(--card);border:1px solid var(--border);border-radius:20px;overflow:hidden;box-shadow:0 40px 80px rgba(0,0,0,.5)}
+.lightbox__inner{display:flex;flex-direction:column;max-width:92vw;max-height:90vh;background:var(--card);border:1px solid var(--border);border-radius:20px;overflow:hidden;box-shadow:0 50px 100px rgba(0,0,0,.65)}
 .lightbox__topbar{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border-bottom:1px solid var(--border);background:var(--bg2);gap:16px}
 .lightbox__topbar-left{display:flex;align-items:center;gap:8px;color:var(--text2);min-width:0}
 .lightbox__title{font-size:.82rem;color:var(--text2);font-family:'Unbounded',sans-serif;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .lightbox__close{background:none;border:1px solid var(--border);color:var(--text2);cursor:pointer;display:flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:8px;transition:all .15s;flex-shrink:0}
 .lightbox__close:hover{background:var(--bg2);border-color:var(--text);color:var(--text)}
 .lightbox__img{max-width:100%;max-height:calc(90vh - 56px);object-fit:contain}
-/* empty */
+
+/* ── EMPTY STATE ── */
 .empty-state{grid-column:1/-1;text-align:center;padding:80px 20px;color:var(--text2);font-size:.9rem}
-.empty-state .big{font-size:48px;margin-bottom:16px}
-/* footer */
+.empty-state .big{font-size:52px;margin-bottom:16px}
+
+/* ── FOOTER ── */
 footer{border-top:1px solid var(--border);padding:30px 28px;background:transparent}
 .footer-inner{max-width:1240px;margin:0 auto;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;color:var(--text2);font-size:.83rem}
 .footer-inner a{color:var(--text2);transition:color .2s}
 .footer-inner a:hover{color:var(--accent)}
-/* animations */
+
+/* ── ANIMATIONS ── */
 @keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
-/* cursor */
+
+/* ── CURSOR ── */
 body,a,button,[role="button"]{cursor:none!important}
 #custom-cursor{position:fixed;top:0;left:0;width:20px;height:20px;pointer-events:none;z-index:99999;transform:translate3d(-100px,-100px,0);will-change:transform;transition:opacity .2s}
 #custom-cursor svg{width:20px;height:20px;filter:drop-shadow(0 1px 2px rgba(0,0,0,.18))}
 [data-theme="dark"] #custom-cursor svg .cursor-fill{fill:#e8ecf4}
-[data-theme="dark"] #custom-cursor svg .cursor-stroke{stroke:#0a0e1a}
+[data-theme="dark"] #custom-cursor svg .cursor-stroke{stroke:#080b14}
 [data-theme="light"] #custom-cursor svg .cursor-fill{fill:#0a0a0a}
 [data-theme="light"] #custom-cursor svg .cursor-stroke{stroke:#ffffff}
 #cursor-trail-canvas{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:99998}
-@media(max-width:600px){.page-wrap{padding:40px 20px 80px}.cards-grid{grid-template-columns:1fr}.stats-strip{gap:8px}.v-card__people-row{grid-template-columns:1fr}.v-card__person--reporter{border-right:none;border-bottom:1px solid var(--border)}}
 </style>
 
 </head>
@@ -232,6 +257,7 @@ body,a,button,[role="button"]{cursor:none!important}
     <nav class="main-nav">
       <a href="index.html">Главная</a>
       <a href="templates.html">Шаблоны</a>
+      <a href="typing.html">Печать</a>
       <a href="shame.html" class="active">Доска позора</a>
     </nav>
     <div class="header-actions">
@@ -243,11 +269,12 @@ body,a,button,[role="button"]{cursor:none!important}
 <main>
 <div class="page-wrap">
 
+  <!-- ── HERO ── -->
   <div class="sh-hero">
     <div class="sh-hero__tag">
       <span class="pulse-dot"></span>Публичный реестр нарушений
     </div>
-    <h1 class="sh-hero__title">Доска <span class="accent">позора</span></h1>
+    <h1 class="sh-hero__title">Доска <span class="accent-red">позора</span></h1>
     <p class="sh-hero__sub">
       Зафиксированные нарушения правил сообщества. Каждая запись подтверждена скриншотом
       и содержит только факты — без оскорблений и домыслов.
@@ -258,19 +285,21 @@ body,a,button,[role="button"]{cursor:none!important}
       </div>
       <div>
         <strong>Цель раздела</strong> — поддержание порядка, дисциплины и соблюдение правил сайта.
-        Раздел не является инструментом травли. Теги публикуются для возможности написать нарушителю
+        Раздел не является инструментом травли. Теги публикуются, чтобы участники могли написать нарушителю
         напрямую. Информация публикуется в соответствии с <a href="#">внутренними правилами</a>.
       </div>
     </div>
   </div>
 
+  <!-- ── STATS ── -->
   <div class="stats-strip">
-    <div class="stat-chip"><strong>3</strong><span>Всего записей</span></div>
+    <div class="stat-chip stat-chip--all"><strong>3</strong><span>Всего записей</span></div>
     <div class="stat-chip stat-chip--red"><strong>1</strong><span>Активных</span></div>
     <div class="stat-chip stat-chip--yellow"><strong>1</strong><span>Предупреждений</span></div>
     <div class="stat-chip stat-chip--green"><strong>1</strong><span>Закрытых</span></div>
   </div>
 
+  <!-- ── FILTERS ── -->
   <div class="filters">
     <button class="filter-btn active" data-filter="all"><span class="filter-dot filter-dot--all"></span>Все</button>
     <button class="filter-btn" data-filter="active"><span class="filter-dot filter-dot--active"></span>Активные</button>
@@ -307,23 +336,22 @@ body,a,button,[role="button"]{cursor:none!important}
         <div class="v-card__offender">
           <div class="v-card__section-label">Нарушитель</div>
           <div class="v-card__user">
-            <div class="v-card__avatar" style="--av-color:#e35b5b">V</div>
+            <div class="v-card__avatar" style="--av-color:#ff5f5f">V</div>
             <div class="v-card__user-info">
               <div class="v-card__nick">violator_nick</div>
               <div class="v-card__uid">ID #00412</div>
             </div>
           </div>
-          <div><span class="contact-label">Написать нарушителю:</span>
-            <div class="v-card__tags">
-              <a class="tag tag--discord" href="https://discord.com/users/000000000000000001" target="_blank" rel="noopener">
-                <svg viewBox="0 0 24 24" fill="currentColor" width="12" height="12"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg>
-                violator_nick#0001
-              </a>
-              <a class="tag tag--telegram" href="https://t.me/violatornick" target="_blank" rel="noopener">
-                <svg viewBox="0 0 24 24" fill="currentColor" width="12" height="12"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
-                @violatornick
-              </a>
-            </div>
+          <span class="contact-label">Написать нарушителю:</span>
+          <div class="v-card__tags">
+            <a class="tag tag--discord" href="https://discord.com/users/000000000000000001" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg>
+              violator_nick#0001
+            </a>
+            <a class="tag tag--telegram" href="https://t.me/violatornick" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+              @violatornick
+            </a>
           </div>
         </div>
         <div class="v-card__violation">
@@ -334,7 +362,7 @@ body,a,button,[role="button"]{cursor:none!important}
           <div class="v-card__person v-card__person--reporter">
             <div class="v-card__section-label">Выставил на доску</div>
             <div class="v-card__user v-card__user--sm">
-              <div class="v-card__avatar v-card__avatar--sm" style="--av-color:#5b9aff">M</div>
+              <div class="v-card__avatar v-card__avatar--sm" style="--av-color:#4f8fff">M</div>
               <div class="v-card__user-info">
                 <div class="v-card__nick v-card__nick--sm">moderator_one</div>
                 <div class="v-card__role-badge v-card__role-badge--mod">Модератор</div>
@@ -344,7 +372,7 @@ body,a,button,[role="button"]{cursor:none!important}
           <div class="v-card__person v-card__person--violator">
             <div class="v-card__section-label">Нарушитель</div>
             <div class="v-card__user v-card__user--sm">
-              <div class="v-card__avatar v-card__avatar--sm" style="--av-color:#e35b5b">V</div>
+              <div class="v-card__avatar v-card__avatar--sm" style="--av-color:#ff5f5f">V</div>
               <div class="v-card__user-info">
                 <div class="v-card__nick v-card__nick--sm">violator_nick</div>
                 <div class="v-card__role-badge v-card__role-badge--violator">Нарушитель</div>
@@ -382,19 +410,18 @@ body,a,button,[role="button"]{cursor:none!important}
         <div class="v-card__offender">
           <div class="v-card__section-label">Нарушитель</div>
           <div class="v-card__user">
-            <div class="v-card__avatar" style="--av-color:#d97706">N</div>
+            <div class="v-card__avatar" style="--av-color:#fbbf24">N</div>
             <div class="v-card__user-info">
               <div class="v-card__nick">nick_three</div>
               <div class="v-card__uid">ID #00389</div>
             </div>
           </div>
-          <div><span class="contact-label">Написать нарушителю:</span>
-            <div class="v-card__tags">
-              <a class="tag tag--discord" href="https://discord.com/users/000000000000000002" target="_blank" rel="noopener">
-                <svg viewBox="0 0 24 24" fill="currentColor" width="12" height="12"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg>
-                nick_three#2244
-              </a>
-            </div>
+          <span class="contact-label">Написать нарушителю:</span>
+          <div class="v-card__tags">
+            <a class="tag tag--discord" href="https://discord.com/users/000000000000000003" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg>
+              nick_three#2244
+            </a>
           </div>
         </div>
         <div class="v-card__violation">
@@ -405,7 +432,7 @@ body,a,button,[role="button"]{cursor:none!important}
           <div class="v-card__person v-card__person--reporter">
             <div class="v-card__section-label">Выставил на доску</div>
             <div class="v-card__user v-card__user--sm">
-              <div class="v-card__avatar v-card__avatar--sm" style="--av-color:#059669">A</div>
+              <div class="v-card__avatar v-card__avatar--sm" style="--av-color:#34d399">A</div>
               <div class="v-card__user-info">
                 <div class="v-card__nick v-card__nick--sm">admin_root</div>
                 <div class="v-card__role-badge v-card__role-badge--admin">Администратор</div>
@@ -415,7 +442,7 @@ body,a,button,[role="button"]{cursor:none!important}
           <div class="v-card__person v-card__person--violator">
             <div class="v-card__section-label">Нарушитель</div>
             <div class="v-card__user v-card__user--sm">
-              <div class="v-card__avatar v-card__avatar--sm" style="--av-color:#d97706">N</div>
+              <div class="v-card__avatar v-card__avatar--sm" style="--av-color:#fbbf24">N</div>
               <div class="v-card__user-info">
                 <div class="v-card__nick v-card__nick--sm">nick_three</div>
                 <div class="v-card__role-badge v-card__role-badge--violator">Нарушитель</div>
@@ -459,13 +486,12 @@ body,a,button,[role="button"]{cursor:none!important}
               <div class="v-card__uid">ID #00201</div>
             </div>
           </div>
-          <div><span class="contact-label">Написать нарушителю:</span>
-            <div class="v-card__tags">
-              <a class="tag tag--telegram" href="https://t.me/usertwo" target="_blank" rel="noopener">
-                <svg viewBox="0 0 24 24" fill="currentColor" width="12" height="12"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
-                @usertwo
-              </a>
-            </div>
+          <span class="contact-label">Написать нарушителю:</span>
+          <div class="v-card__tags">
+            <a class="tag tag--telegram" href="https://t.me/usertwo" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+              @usertwo
+            </a>
           </div>
         </div>
         <div class="v-card__violation">
@@ -476,7 +502,7 @@ body,a,button,[role="button"]{cursor:none!important}
           <div class="v-card__person v-card__person--reporter">
             <div class="v-card__section-label">Выставил на доску</div>
             <div class="v-card__user v-card__user--sm">
-              <div class="v-card__avatar v-card__avatar--sm" style="--av-color:#5b9aff">M</div>
+              <div class="v-card__avatar v-card__avatar--sm" style="--av-color:#4f8fff">M</div>
               <div class="v-card__user-info">
                 <div class="v-card__nick v-card__nick--sm">moderator_one</div>
                 <div class="v-card__role-badge v-card__role-badge--mod">Модератор</div>
@@ -542,9 +568,7 @@ function closeLightbox(e) {
   document.getElementById('lightbox').classList.remove('open');
   document.body.style.overflow = '';
 }
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') { closeLightbox(); }
-});
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
 
 const filterBtns = document.querySelectorAll('.filter-btn');
 const allCards = document.querySelectorAll('.v-card');
@@ -571,7 +595,7 @@ filterBtns.forEach(btn => {
 });
 </script>
 
-<!-- Custom cursor (same as index.html) -->
+<!-- Custom cursor -->
 <div id="custom-cursor">
   <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
     <path class="cursor-stroke" d="M5.5 3.21V20.8l4.86-4.86h8.14L5.5 3.21z" stroke-width="1.4" fill="none"/>
@@ -579,7 +603,6 @@ filterBtns.forEach(btn => {
   </svg>
 </div>
 <canvas id="cursor-trail-canvas"></canvas>
-
 <script>
 (function(){
   'use strict';
@@ -591,16 +614,15 @@ filterBtns.forEach(btn => {
   let mouseX=-100,mouseY=-100,cursorX=-100,cursorY=-100,visible=false;
   const LERP=0.25,TRAIL_LENGTH=18,trail=[];
   function resize(){const dpr=Math.min(window.devicePixelRatio||1,2);canvas.width=window.innerWidth*dpr;canvas.height=window.innerHeight*dpr;canvas.style.width=window.innerWidth+'px';canvas.style.height=window.innerHeight+'px';ctx.setTransform(dpr,0,0,dpr,0,0);}
-  function getAccentColor(){return getComputedStyle(document.documentElement).getPropertyValue('--accent').trim()||'#5b9aff';}
+  function getAccentColor(){return getComputedStyle(document.documentElement).getPropertyValue('--accent').trim()||'#4f8fff';}
   function hexToRgba(hex,alpha){hex=hex.replace('#','');if(hex.length===3)hex=hex.split('').map(c=>c+c).join('');const n=parseInt(hex,16);return'rgba('+((n>>16)&255)+','+((n>>8)&255)+','+(n&255)+','+alpha+')';}
   window.addEventListener('mousemove',function(e){mouseX=e.clientX;mouseY=e.clientY;if(!visible){visible=true;cursor.style.opacity='1';cursorX=mouseX;cursorY=mouseY;}});
   document.addEventListener('mouseleave',function(){visible=false;cursor.style.opacity='0';});
-  window.addEventListener('resize',resize);
-  resize();
+  window.addEventListener('resize',resize);resize();
   function tick(){
     cursorX+=(mouseX-cursorX)*LERP;cursorY+=(mouseY-cursorY)*LERP;
     cursor.style.transform='translate3d('+cursorX+'px,'+cursorY+'px,0)';
-    trail.push({x:cursorX+4,y:cursorY+4,time:performance.now()});
+    trail.push({x:cursorX+4,y:cursorY+4});
     if(trail.length>TRAIL_LENGTH)trail.shift();
     ctx.clearRect(0,0,canvas.width/(Math.min(window.devicePixelRatio||1,2)),canvas.height/(Math.min(window.devicePixelRatio||1,2)));
     if(trail.length>2&&visible){
