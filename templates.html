@@ -2189,13 +2189,6 @@ function buildStarBlock(tplId, compact) {
     const myStarsWrap = buildMyVoteStars(info.myRating);
     topRow.appendChild(myStarsWrap);
 
-    // Рядом серым — глобальный avg
-    if (info.count > 0) {
-      const avgLabel = document.createElement('span');
-      avgLabel.style.cssText = 'font-size:0.68rem;color:var(--text2);font-family:"JetBrains Mono",monospace;margin-left:3px;';
-      avgLabel.textContent = '(общ. ' + info.avg.toFixed(1) + ')';
-      topRow.appendChild(avgLabel);
-    }
   } else {
     // Серые дробные avg-звёзды — для всех
     const avgStars = buildAvgStars(info.avg || 0);
@@ -2203,19 +2196,7 @@ function buildStarBlock(tplId, compact) {
     topRow.appendChild(avgStars);
   }
 
-  // Числовое среднее + счётчик
-  const metaEl = document.createElement('span');
-  metaEl.className = 'rating-meta';
-  if (info.count > 0) {
-    // Если уже голосовал — avg уже показан отдельно рядом со звёздами
-    metaEl.textContent = alreadyVoted
-      ? '(' + info.count + (info.count === 1 ? ' голос' : info.count < 5 ? ' голоса' : ' голосов') + ')'
-      : info.avg.toFixed(1) + ' (' + info.count + ')';
-  } else {
-    metaEl.textContent = 'нет оценок';
-    metaEl.style.fontStyle = 'italic';
-  }
-  topRow.appendChild(metaEl);
+  // (rating numbers hidden — stars only)
 
   // Кнопка удалить оценку (если уже голосовал)
   if (alreadyVoted) {
