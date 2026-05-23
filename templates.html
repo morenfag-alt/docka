@@ -1743,6 +1743,8 @@ function renderGrid() {
 // ============================================================
 function applyLineCopyOptions(line) {
   let text = line;
+  // Keep only Cyrillic letters and spaces
+  text = text.replace(/[^а-яА-ЯёЁ ]/g, '').replace(/ {2,}/g, ' ').trim();
   // Case transform
   const caseMode = window._copyCase || 'none';
   if (caseMode === 'lower') text = text.toLowerCase();
