@@ -3443,16 +3443,6 @@ document.querySelectorAll('.panel-tab').forEach(tab => {
   var words = ['чо маме', 'чо папе', 'чо в хуй', 'чо в зеркало', 'кто ебал', 'я это ты', 'вопрос ебырю', 'команда богу'];
   var particles = [];
 
-  // Neon color palettes: [glowColor, textColor]
-  var neonPalettes = [
-    ['#4f8fff', '#a0c4ff'],
-    ['#a855f7', '#d8b4fe'],
-    ['#06b6d4', '#67e8f9'],
-    ['#10b981', '#6ee7b7'],
-    ['#f43f5e', '#fda4af'],
-    ['#f59e0b', '#fcd34d'],
-  ];
-
   function resize(){
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
@@ -3471,17 +3461,11 @@ document.querySelectorAll('.panel-tab').forEach(tab => {
     this.y = random(-80, canvas.height);
     this.vx = random(-0.4, 0.4);
     this.vy = random(-0.8, -0.2);
-    this.alpha = random(0.18, 0.45);
+    this.alpha = random(0.07, 0.22);
     this.size = random(13, 28);
-    var palette = neonPalettes[Math.floor(Math.random()*neonPalettes.length)];
-    this.glowColor = palette[0];
-    this.textColor = palette[1];
-    this.trail = [];
-    this.trailLen = Math.floor(random(8, 18));
+    this.color = Math.random() > 0.5 ? '#4f8fff' : '#7b8ba8';
   };
   Particle.prototype.update = function(){
-    this.trail.push({ x: this.x, y: this.y });
-    if (this.trail.length > this.trailLen) this.trail.shift();
     this.x += this.vx;
     this.y += this.vy;
     if(this.y < -60 || this.x < -120 || this.x > canvas.width+120){
@@ -3490,35 +3474,10 @@ document.querySelectorAll('.panel-tab').forEach(tab => {
     }
   };
   Particle.prototype.draw = function(){
-    // Fading neon trail
-    for (var t = 0; t < this.trail.length; t++) {
-      var tr = this.trail[t];
-      var progress = t / this.trail.length;
-      ctx.save();
-      ctx.globalAlpha = progress * this.alpha * 0.5;
-      ctx.font = 'bold ' + (this.size * (0.5 + progress * 0.5)) + 'px "Unbounded", sans-serif';
-      ctx.shadowBlur = 14 * progress;
-      ctx.shadowColor = this.glowColor;
-      ctx.fillStyle = this.glowColor;
-      ctx.fillText(this.word, tr.x, tr.y);
-      ctx.restore();
-    }
-    // Outer glow pass
-    ctx.save();
-    ctx.globalAlpha = this.alpha * 0.6;
-    ctx.font = 'bold ' + this.size + 'px "Unbounded", sans-serif';
-    ctx.shadowBlur = 20;
-    ctx.shadowColor = this.glowColor;
-    ctx.fillStyle = this.glowColor;
-    ctx.fillText(this.word, this.x, this.y);
-    ctx.restore();
-    // Sharp bright text pass
     ctx.save();
     ctx.globalAlpha = this.alpha;
     ctx.font = 'bold ' + this.size + 'px "Unbounded", sans-serif';
-    ctx.shadowBlur = 8;
-    ctx.shadowColor = this.glowColor;
-    ctx.fillStyle = this.textColor;
+    ctx.fillStyle = this.color;
     ctx.fillText(this.word, this.x, this.y);
     ctx.restore();
   };
