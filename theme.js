@@ -292,8 +292,13 @@
 
     // View Transitions API
     if (!reduce && typeof document.startViewTransition === 'function') {
+      // Mark transition direction BEFORE the snapshot is taken
+      // so CSS can set z-index correctly for both directions
+      document.documentElement.setAttribute('data-theme-next', next);
+
       var transition = document.startViewTransition(function() {
         applyTheme(next);
+        document.documentElement.removeAttribute('data-theme-next');
       });
 
       transition.ready.then(function() {
